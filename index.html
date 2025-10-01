@@ -3,1122 +3,1159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Myślenie Analityczne w Erze AI</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <title>Notatki: Myślenie Analityczne w Erze AI</title>
     <style>
-        /* --- Zmienne Kolorów --- */
+        /* Czcionki */
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+
         :root {
-            --color-dark-blue-1: #074983;
-            --color-dark-blue-2: #0e6fa6;
-            --color-dark-blue-3: #12385f;
-            --color-accent-orange: #d15124; /* Pomarańczowy */
-            --color-text-dark: #17336B;
-            --color-text-light: #f0f0f0;
-            --color-highlight-pink: #A84FAA;
-            --color-card-background: #ffffff;
-            --color-sticky-background: #ffcc66; /* Jasny żółty/pomarańczowy do notatek */
-            --color-quiz-correct: #b3ffb3;
-            --color-quiz-incorrect: #ffb3b3;
-            --color-quiz-correct-icon: green;
-            --color-quiz-incorrect-icon: red;
+            /* Kolory Główne/Tła */
+            --color-bg-lightest: #12385f;
+            --color-bg-lighter: #0e6fa6;
+            --color-bg-darker: #074983;
+            --color-bg-accent: #d15124; /* Akcent w gradiencie */
+            
+            /* Kolory Tekstu */
+            --color-text-dark: #17336B; /* Ciemny tekst na jasnym tle */
+            --color-text-light: #f0f0f0; /* Jasny tekst na ciemnym tle (kremowy) */
+            
+            /* Kolory Akcentujące (Pastelowe/Stonowane) */
+            --color-accent-blue-purple: #A84FAA; 
+            --color-accent-pink: #cc99ff;
+            --color-card-bg: #ffffff; /* Jasne tło kart */
+            --color-sticky-note-1: #ffd700; /* Złoty (dla koloru akcentującego) */
+            --color-sticky-note-2: #87ceeb; /* Jasny niebieski */
+            --color-sticky-note-3: #90ee90; /* Jasny zielony */
+
+            /* Kolory Quizu */
+            --color-correct: #c8e6c9; /* Jasno zielony */
+            --color-incorrect: #ffcdd2; /* Jasno czerwony */
+            --color-correct-check: #4CAF50;
+            --color-incorrect-x: #F44336;
         }
 
-        /* --- Globalne style i Layout --- */
         body {
             font-family: 'Lato', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            /* Gradientowe tło */
-            background: linear-gradient(180deg, var(--color-dark-blue-2) 0%, var(--color-dark-blue-3) 50%, var(--color-dark-blue-1) 100%);
             color: var(--color-text-light);
-            line-height: 1.6;
+            background: linear-gradient(135deg, var(--color-bg-lightest), var(--color-bg-lighter), var(--color-bg-darker));
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
         }
 
         .container {
             width: 90%;
             max-width: 1200px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.95); /* Białe/kremowe tło dla treści */
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            border-radius: 15px;
-            color: var(--color-text-dark);
+            margin: 0 auto;
+            padding: 20px 0;
+            flex-grow: 1;
         }
 
-        /* --- Nagłówki i Tytuły --- */
-        h1, h2, h3, h4 {
-            font-weight: 900;
-            text-align: center;
-            margin-top: 30px;
-        }
-        
-        /* Kolor nagłówków na podstronach */
-        h2 {
-            font-size: 2.2em;
-            color: var(--color-highlight-pink) !important; /* #A84FAA */
-            border-bottom: 3px solid var(--color-highlight-pink);
-            padding-bottom: 10px;
-            margin-bottom: 25px;
-        }
-        
-        /* Kolor tekstu na jasnym tle */
-        p, li {
-            font-size: 1.1em;
-            color: var(--color-text-dark); /* #17336B */
-        }
-        
-        .card strong {
-             color: var(--color-accent-orange);
-        }
-
-        /* Tytuł główny strony - Strona Główna */
-        #home-title {
-            color: var(--color-text-light);
-            font-size: 3.5em;
-            margin-bottom: 10px;
-            text-align: center;
+        /* --- MENU (Poziome, na górze strony) --- */
+        .header {
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
             width: 100%;
-            white-space: nowrap; /* Tytuł w jednej linii */
-            font-weight: 900;
-        }
-
-        #home-subtitle {
-            color: var(--color-text-light);
-            font-size: 1.5em;
-            font-weight: 400;
-            margin-bottom: 40px;
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        /* --- Nawigacja (Menu) --- */
-        .navbar {
-            width: 100%;
-            background-color: var(--color-dark-blue-3);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         }
 
-        .nav-list {
+        .nav-menu {
+            display: flex;
+            justify-content: center;
             list-style: none;
             padding: 0;
             margin: 0;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .nav-item {
-            cursor: pointer;
-            padding: 15px 25px;
-            transition: background-color 0.3s, color 0.3s;
-            color: var(--color-text-light);
-            font-weight: 700;
-            text-transform: uppercase;
-            border-bottom: 3px solid transparent;
-        }
-
-        .nav-item:hover, .nav-item.active {
-            background-color: var(--color-dark-blue-2);
-            border-bottom: 3px solid var(--color-highlight-pink);
-        }
-
-        /* --- Sekcje Treści --- */
-        .content-section {
-            display: none; /* Domyślnie wszystkie sekcje są ukryte */
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        /* Ustawienia dla sekcji na całą szerokość (Strona Główna) */
-        #home-section {
-            background: linear-gradient(180deg, var(--color-dark-blue-2) 0%, var(--color-dark-blue-3) 50%, var(--color-dark-blue-1) 100%);
-            min-height: 80vh;
-            display: none; 
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 50px 20px;
-            border-radius: 15px;
-            margin-top: 20px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
         }
-        
-        #home-section.active {
-            display: flex;
-        }
-        
-        /* Styl dla sekcji wewnętrznych (w kontenerze) */
-        .inner-section {
-             padding: 30px;
-             display: none; 
-        }
-        
-        .inner-section.active {
-            display: block; 
+
+        .nav-menu li {
+            margin: 0;
         }
 
-
-        /* --- Przyciski --- */
-        .button {
-            padding: 12px 25px;
+        .nav-menu button {
+            background-color: transparent;
+            color: var(--color-text-light);
             border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 700;
-            text-transform: uppercase;
-            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+            padding: 15px 25px;
+            text-align: center;
             text-decoration: none;
             display: inline-block;
-            margin: 10px;
-            color: var(--color-text-light);
-            background-color: var(--color-accent-orange);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s, border-bottom 0.3s;
+            font-weight: 700;
         }
 
-        .button:hover {
-            background-color: #f06a38;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
-        }
-        
-        .button:disabled {
-            background-color: #ccc !important;
-            cursor: not-allowed !important;
-            transform: none !important;
-            box-shadow: none !important;
+        .nav-menu button:hover,
+        .nav-menu button.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--color-accent-pink);
+            border-bottom: 3px solid var(--color-accent-blue-purple);
         }
 
-        .home-button-container {
-            display: flex;
-            justify-content: center;
-            padding: 20px 0;
-            margin-top: 20px; /* Przerwa przed przyciskiem "Chcę wiedzieć więcej" */
+        /* --- SEKCJE TREŚCI --- */
+        .content-section {
+            display: none;
+            padding: 40px 0;
         }
-        
-        /* --- Pozostałe style --- */
-        .card {
-            background-color: var(--color-card-background);
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 20px;
+
+        .content-section.active {
+            display: block;
+        }
+
+        h1, h2, h3 {
+            font-weight: 900;
+            text-align: center;
             margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s;
+        }
+
+        .section-title {
+            color: var(--color-accent-blue-purple);
+            font-size: 32px;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Strona Główna */
+        #home-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 70px); /* Dopasowanie do menu */
+            text-align: center;
+        }
+
+        #home-section .main-title {
+            font-size: 56px;
+            font-weight: 900;
+            line-height: 1.2;
+            color: var(--color-text-light);
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .main-subtitle {
+            font-size: 24px;
+            font-weight: 300;
+            margin-bottom: 50px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .btn-main-action {
+            background-color: var(--color-accent-blue-purple);
+            color: var(--color-text-light);
+            border: none;
+            padding: 15px 40px;
+            font-size: 20px;
+            font-weight: 700;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-main-action:hover {
+            background-color: #7c4dff;
+            transform: translateY(-2px);
+        }
+
+        /* Karty Treści (Content Cards) */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background-color: var(--color-card-bg);
+            color: var(--color-text-dark);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            line-height: 1.6;
         }
 
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* Akordeony i Tooltipy */
-        .accordion-item {
-            border: 1px solid #eee;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
 
-        .accordion-header {
-            background-color: #f7f7f7;
-            padding: 15px;
-            cursor: pointer;
-            font-weight: 700;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .card h3 {
+            color: var(--color-accent-blue-purple);
+            font-size: 22px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        /* Akordeony dla Definicji */
+        .accordion {
+            background-color: #f8f8f8;
             color: var(--color-text-dark);
-            transition: background-color 0.3s;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            text-align: left;
+            border: none;
+            outline: none;
+            transition: 0.4s;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 5px solid var(--color-accent-blue-purple);
         }
 
-        .accordion-header:hover {
-            background-color: #eee;
+        .active-acc, .accordion:hover {
+            background-color: #e8e8e8;
         }
 
-        .accordion-content {
-            padding: 15px;
-            background-color: #fff;
-            display: none;
-            border-top: 1px solid #eee;
-        }
-
-        .accordion-header::after {
-            content: '+';
-            font-size: 1.2em;
-            transition: transform 0.3s;
-        }
-
-        .accordion-header.active::after {
-            content: '-';
-            transform: rotate(180deg);
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            color: var(--color-text-dark);
         }
         
-        .tooltip-container {
-            position: relative;
-            display: inline-block;
-            border-bottom: 1px dashed var(--color-text-dark);
-            cursor: help;
-            font-weight: 600;
+        .panel p {
+            padding: 10px 0;
         }
 
-        .tooltip-text {
-            visibility: hidden;
-            width: 300px;
-            background-color: var(--color-dark-blue-1);
-            color: var(--color-text-light);
-            text-align: center;
-            border-radius: 6px;
-            padding: 10px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -150px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            font-weight: 400;
+        .panel strong {
+            color: var(--color-accent-blue-purple);
         }
 
-        .tooltip-container:hover .tooltip-text {
-            visibility: visible;
-            opacity: 1;
-        }
-
-        /* --- Sticky Notes --- */
-        .sticky-notes-grid {
+        /* Sticky Notes (Do Zapamiętania) */
+        .sticky-note-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px; /* Duże odstępy w wierszach i kolumnach, zgodnie z życzeniem */
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
             padding: 20px;
-            justify-items: stretch; /* Rozciągnij na całą szerokość kolumny */
-        }
-        
-        @media (max-width: 900px) {
-            .sticky-notes-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 600px) {
-            .sticky-notes-grid {
-                grid-template-columns: 1fr;
-            }
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
         }
 
         .sticky-note {
-            background-color: var(--color-sticky-background);
+            min-height: 150px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.2);
+            transform: rotate(calc(var(--rotation) * 1deg));
+            transition: transform 0.2s;
+            color: var(--color-text-dark);
+            font-weight: 700;
+            line-height: 1.4;
+        }
+        
+        /* Nadawanie kolorów sticky notes */
+        .sticky-note:nth-child(3n+1) { background-color: var(--color-sticky-note-1); --rotation: -1; }
+        .sticky-note:nth-child(3n+2) { background-color: var(--color-sticky-note-2); --rotation: 2; }
+        .sticky-note:nth-child(3n+3) { background-color: var(--color-sticky-note-3); --rotation: -3; }
+
+        .sticky-note p {
+            font-size: 16px;
+            margin: 0;
+            color: var(--color-text-dark);
+        }
+        
+        /* Linki (Więcej Wiedzy) */
+        .external-link-card {
+            background-color: var(--color-card-bg);
             color: var(--color-text-dark);
             padding: 20px;
-            border-radius: 5px;
-            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            min-height: 120px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
-            transform: rotate(1deg);
-            box-sizing: border-box; /* Upewnia się, że padding nie zwiększa szerokości */
-        }
-
-        .sticky-note:nth-child(even) { transform: rotate(-1deg); }
-        .sticky-note:nth-child(3n) { transform: rotate(2deg); }
-
-        .sticky-note strong {
-            font-size: 1.1em;
-            margin-bottom: 5px;
-            display: block;
-        }
-
-        /* Linki i Quiz - style pominięte dla zwięzłości, ale obecne w JS/HTML */
-        
-        .link-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .link-item {
-            background-color: #f9f9f9;
-            padding: 15px;
             margin-bottom: 15px;
-            border-radius: 8px;
-            border-left: 5px solid var(--color-highlight-pink);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            border-left: 5px solid var(--color-accent-blue-purple);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        .link-item a {
-            color: var(--color-dark-blue-1);
+        .external-link-card a {
+            color: var(--color-accent-blue-purple);
             font-weight: 700;
             text-decoration: none;
             display: block;
             margin-bottom: 5px;
-            font-size: 1.1em;
+            font-size: 18px;
         }
 
-        .link-item p {
+        .external-link-card a:hover {
+            text-decoration: underline;
+        }
+
+        .external-link-card p {
             margin: 0;
-            font-size: 0.9em;
+            font-size: 14px;
+        }
+        
+        /* Quiz Styles */
+        #quiz-section {
+            padding-top: 20px;
+        }
+
+        .quiz-card {
+            background-color: var(--color-card-bg);
+            color: var(--color-text-dark);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+        }
+
+        .question-container {
+            margin-bottom: 20px;
+            min-height: 250px;
+        }
+
+        .question-number {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-accent-blue-purple);
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
             color: var(--color-text-dark);
         }
-        
-        /* Schemat Człowiek-AI */
-        .human-ai-schema {
+
+        .quiz-option {
             display: flex;
-            justify-content: space-around;
             align-items: center;
-            margin: 30px 0;
-            padding: 20px;
-            background-color: #eef;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-        }
-        
-        .human-ai-box {
-            background-color: #fff;
-            padding: 25px;
+            background-color: #f0f0f0;
+            padding: 12px;
+            margin-bottom: 10px;
             border-radius: 8px;
-            width: 40%;
+            cursor: pointer;
+            transition: background-color 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+
+        .quiz-option:hover {
+            background-color: #e0e0e0;
+        }
+
+        .quiz-option input[type="radio"] {
+            margin-right: 15px;
+            transform: scale(1.5);
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--color-accent-blue-purple);
+            transition: all 0.2s;
+        }
+        
+        .quiz-option input[type="radio"]:checked {
+            background-color: var(--color-accent-blue-purple);
+            border-color: var(--color-accent-blue-purple);
+        }
+        
+        .quiz-option.selected {
+            box-shadow: 0 0 0 3px var(--color-accent-blue-purple);
+        }
+
+        .quiz-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .btn-quiz {
+            background-color: var(--color-accent-blue-purple);
+            color: var(--color-text-light);
+            border: none;
+            padding: 10px 25px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-quiz:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .btn-quiz.secondary {
+            background-color: #6c757d;
+        }
+
+        /* Wynik Quizu */
+        #quiz-result {
             text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            border: 2px solid var(--color-dark-blue-2);
+            padding: 40px;
+            background-color: var(--color-card-bg);
+            color: var(--color-text-dark);
+            border-radius: 12px;
+            max-width: 700px;
+            margin: 30px auto;
         }
-        
-        .human-ai-box h4 {
-            color: var(--color-dark-blue-1);
-            margin-top: 0;
+
+        #quiz-score {
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--color-accent-blue-purple);
+            margin-bottom: 10px;
         }
-        
-        .arrow-icon {
-            font-size: 3em;
-            color: var(--color-highlight-pink);
-            margin: 0 10px;
+
+        #quiz-quote {
+            font-style: italic;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
         }
-        
+
+        #quiz-cat-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin: 20px auto;
+            border-radius: 50%;
+            border: 5px solid var(--color-accent-blue-purple);
+        }
+
+        .result-question {
+            text-align: left;
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+
+        .result-question-text {
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--color-text-dark);
+        }
+
+        .result-option {
+            padding: 8px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .correct-answer {
+            background-color: var(--color-correct);
+        }
+
+        .incorrect-selected {
+            background-color: var(--color-incorrect);
+        }
+
+        .icon-check, .icon-x {
+            font-size: 18px;
+            margin-right: 10px;
+            font-weight: 900;
+        }
+
+        .icon-check {
+            color: var(--color-correct-check);
+        }
+
+        .icon-x {
+            color: var(--color-incorrect-x);
+        }
+
+        /* Przycisk Download PDF */
         .pdf-download-container {
             text-align: center;
-            padding: 20px;
-            margin-top: 20px;
-            border-top: 1px solid #ddd;
-            background-color: #f7f7f7;
-            color: var(--color-text-dark);
+            padding: 30px 0;
+            background-color: rgba(0, 0, 0, 0.2);
+            margin-top: 40px;
         }
 
-        /* Styles for Quiz, omitted for brevity */
-        .quiz-container { max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f7f7f7; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); }
-        .question-card { background-color: var(--color-card-background); padding: 20px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #ddd; }
-        .question-card h3 { margin-top: 0; color: var(--color-text-dark); font-size: 1.4em; text-align: left; }
-        .question-number { font-weight: 400; font-size: 0.9em; color: #666; margin-bottom: 15px; display: block; }
-        .options-list { list-style: none; padding: 0; }
-        .option-label { display: block; padding: 12px; margin-bottom: 8px; border: 2px solid #ddd; border-radius: 6px; cursor: pointer; transition: background-color 0.2s, border-color 0.2s; color: var(--color-text-dark); position: relative; }
-        .option-label:hover { background-color: #f0f0f0; border-color: var(--color-accent-orange); }
-        .quiz-navigation { display: flex; justify-content: space-between; margin-top: 20px; padding: 0 10px; }
-        .quiz-navigation button { color: var(--color-text-light); background-color: var(--color-accent-orange); }
-        .option-label.selected { border-color: var(--color-highlight-pink); background-color: #ffe0f0; }
-        .result-correct { background-color: var(--color-quiz-correct); border-color: var(--color-quiz-correct-icon); font-weight: 700; }
-        .result-incorrect { background-color: var(--color-quiz-incorrect); border-color: var(--color-quiz-incorrect-icon); font-weight: 700; }
-        .feedback-icon { margin-left: 10px; font-size: 1.2em; font-weight: 900; position: absolute; right: 15px; }
-        #quiz-result { text-align: center; padding: 20px; border-radius: 10px; margin-top: 20px; background-color: #fff; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
-        #quiz-score { font-size: 2.5em; font-weight: 900; color: var(--color-highlight-pink); margin-bottom: 15px; }
-        .options-list input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
-        .quiz-result-feedback .option-label { pointer-events: none; }
+        .btn-download-pdf {
+            background-color: var(--color-accent-blue-purple);
+            color: var(--color-text-light);
+            border: none;
+            padding: 12px 30px;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
 
+        .btn-download-pdf:hover {
+            background-color: #7c4dff;
+            transform: translateY(-2px);
+        }
+        
+        /* Media Queries dla responsywności */
+        @media (max-width: 768px) {
+            .nav-menu {
+                flex-wrap: wrap;
+            }
+
+            .nav-menu button {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            #home-section .main-title {
+                font-size: 40px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <header class="navbar">
+    <header class="header">
         <nav>
-            <ul class="nav-list">
-                <li class="nav-item active" data-tab="home-section">Strona Główna</li>
-                <li class="nav-item" data-tab="key-concepts-section">Kluczowe Pojęcia</li>
-                <li class="nav-item" data-tab="examples-section">Przykłady</li>
-                <li class="nav-item" data-tab="remember-section">Do Zapamiętania</li>
-                <li class="nav-item" data-tab="errors-section">Najczęstsze Błędy</li>
-                <li class="nav-item" data-tab="more-knowledge-section">Więcej Wiedzy</li>
-                <li class="nav-item" data-tab="quiz-section">Quiz</li>
+            <ul class="nav-menu">
+                <li><button onclick="showSection('home', this)" id="nav-home">Strona Główna</button></li>
+                <li><button onclick="showSection('key-concepts', this)">Kluczowe Pojęcia</button></li>
+                <li><button onclick="showSection('examples', this)">Przykłady</button></li>
+                <li><button onclick="showSection('case-study', this)">Case Study</button></li>
+                <li><button onclick="showSection('to-remember', this)">Do Zapamiętania</button></li>
+                <li><button onclick="showSection('most-common-errors', this)">Najczęstsze Błędy</button></li>
+                <li><button onclick="showSection('more-knowledge', this)">Więcej Wiedzy</button></li>
+                <li><button onclick="showSection('quiz', this)">Quiz</button></li>
             </ul>
         </nav>
     </header>
-    
-    <section id="home-section" class="content-section active">
-        <h1 id="home-title">Myślenie Analityczne w Erze AI</h1>
-        <h2 id="home-subtitle">Kluczowe kompetencje w świecie jutra, gdzie technologia i ludzka inteligencja się łączą.</h2>
-        <div class="home-button-container">
-            <button class="button" id="go-to-first-tab">Chcę wiedzieć więcej</button>
-        </div>
-    </section>
 
     <div class="container">
+        <section id="home-section" class="content-section active">
+            <h1 class="main-title">Myślenie Analityczne w Erze AI</h1>
+            <p class="main-subtitle">Klucz do przetrwania i rozwoju w świecie napędzanym przez sztuczną inteligencję.</p>
+            <button class="btn-main-action" onclick="showFirstSection()">Chcę wiedzieć więcej</button>
+        </section>
 
-        <section id="key-concepts-section" class="content-section inner-section">
-            <h2>Kluczowe Pojęcia: Definicja, Przykład, Kontekst</h2>
+        <section id="key-concepts-section" class="content-section">
+            <h2 class="section-title">Kluczowe Pojęcia: Definicja, Przykład, Kontekst</h2>
+            
+            <button class="accordion">Myślenie Analityczne (Analytical Thinking)</button>
+            <div class="panel">
+                <p><strong>Definicja:</strong> Jest to umiejętność rozkładania złożonego problemu na mniejsze, zarządzalne elementy. Proces ten obejmuje zbieranie danych, ich organizowanie, analizowanie faktów, oddzielanie ich od opinii, a następnie syntezowanie w celu wyciągnięcia logicznych wniosków i znalezienia optymalnych rozwiązań.</p>
+                <p><strong>Przykład:</strong> Gdy sprzedaż produktu spada, analityk rozkłada problem na czynniki: cenę, konkurencję, kampanie marketingowe, sezonowość i opinie klientów. Nie reaguje impulsywnie, lecz systematycznie bada każdy z tych czynników.</p>
+                <p><strong>Kontekst:</strong> W erze AI, myślenie analityczne staje się kluczową, unikalnie ludzką umiejętnością. AI jest narzędziem do przetwarzania danych (data processing), ale to człowiek musi zdefiniować problem, postawić hipotezę i krytycznie ocenić wyniki dostarczone przez algorytm, zadając pytania: "Dlaczego?" i "Co dalej?"</p>
+            </div>
 
-            <div class="card">
-                <h3>Sztuczna Inteligencja (AI - Artificial Intelligence)</h3>
-                <p>
-                    <div class="accordion-item">
-                        <div class="accordion-header">Definicja i Kontekst</div>
-                        <div class="accordion-content">
-                            AI to dziedzina informatyki zajmująca się tworzeniem systemów zdolnych do wykonywania zadań, które zwykle wymagają ludzkiej inteligencji, takich jak uczenie się, rozumowanie, rozpoznawanie wzorców i podejmowanie decyzji. Obecnie przeżywamy rewolucję, w której AI staje się wszechobecna – od analizy danych w biznesie, przez automatyzację w pracy, aż po codzienne zastosowania, co wymaga od ludzi adaptacji i posiadania odpowiedniej wiedzy.
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <div class="accordion-header">Przykład: Model Językowy (LLM)</div>
-                        <div class="accordion-content">
-                            Zaawansowane systemy, takie jak <span class="tooltip-container">Duże Modele Językowe (LLM)<span class="tooltip-text">Large Language Models – programy AI, trenowane na ogromnych ilościach tekstu, potrafiące generować spójne i kontekstowe odpowiedzi, ale nie posiadają prawdziwej świadomości ani zdolności do tworzenia prawdziwie oryginalnych idei.</span></span>, potrafią przetwarzać i generować tekst, a nawet tworzyć kod. Są to potężne narzędzia, które jednak muszą być nadzorowane przez człowieka, ponieważ mogą popełniać błędy (halucynacje) i nie są zdolne do etycznych osądów.
-                        </div>
-                    </div>
-                </p>
+            <button class="accordion">Błąd Konfirmacji (Confirmation Bias)</button>
+            <div class="panel">
+                <p><strong>Definicja:</strong> Jest to tendencja do poszukiwania, interpretowania, faworyzowania i przywoływania informacji w sposób, który potwierdza lub wspiera wcześniejsze przekonania lub wartości. To jedna z najczęstszych pułapek poznawczych.</p>
+                <p><strong>Przykład:</strong> Osoba, która uważa, że reklamy na Facebooku nie działają, podświadomie szuka raportów i danych, które to potwierdzają, ignorując te, które pokazują ich skuteczność w innych branżach. To zniekształca obiektywną analizę.</p>
+                <p><strong>Kontekst:</strong> Myślenie analityczne wymaga ciągłego kwestionowania własnych założeń. Zwalczanie błędu konfirmacji jest niezbędne, aby nie przekształcić analizy w proces szukania dowodów na z góry ustaloną tezę.</p>
             </div>
             
-            <div class="card">
-                <h3>Myślenie Analityczne</h3>
-                <p>
-                    <div class="accordion-item">
-                        <div class="accordion-header">Definicja i Kontekst</div>
-                        <div class="accordion-content">
-                            To proces systematycznego rozkładania złożonego problemu lub zbioru danych na mniejsze, bardziej zrozumiałe części. Obejmuje to krytyczną ocenę informacji, identyfikację wzorców, wyciąganie logicznych wniosków oraz poszukiwanie alternatywnych wyjaśnień. W erze AI umiejętność ta jest kluczowa, ponieważ pozwala nam weryfikować i kwestionować wyniki generowane przez sztuczną inteligencję, zapobiegając jej ślepemu zaufaniu. To zdolność do <span class="tooltip-container">zadawania pytań<span class="tooltip-text">Aktywne kwestionowanie dostarczonych informacji, a nie tylko ich bierne przyjmowanie. Pytaj: "Dlaczego?", "Co, jeśli?", "Jakie są alternatywy?".</span></span>.
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <div class="accordion-header">Przykład: Analiza Danych</div>
-                        <div class="accordion-content">
-                            Zamiast polegać na gotowym raporcie z AI, analityk stosujący myślenie analityczne zada pytania o źródło danych, metodologię ich zbierania, możliwe błędy w interpretacji oraz czy istnieją czynniki spoza danych (np. zmiana trendów rynkowych), które mogły wpłynąć na wynik. Pozwala to na głębsze, kontekstowe zrozumienie.
-                        </div>
-                    </div>
-                </p>
-            </div>
-            
-            <div class="card">
-                <h3>Synergia Człowiek-AI</h3>
-                <p>
-                    <div class="accordion-item">
-                        <div class="accordion-header">Definicja i Kontekst</div>
-                        <div class="accordion-content">
-                            Synergia oznacza współpracę dwóch lub więcej elementów, w której efekt końcowy jest większy niż suma ich pojedynczych działań. W kontekście AI i człowieka, synergia polega na łączeniu komplementarnych mocnych stron: AI efektywnie przetwarza ogromne ilości danych i automatyzuje powtarzalne zadania, natomiast człowiek wnosi <span class="tooltip-container">krytyczne myślenie<span class="tooltip-text">Ocenianie informacji w sposób obiektywny i niezależny, w celu formułowania osądów i wniosków. Niezbędne do weryfikacji danych AI.</span></span>, kreatywność, osąd etyczny i kontekstualne rozumienie. Rewolucja AI jest wyzwaniem do bycia bardziej ludzkim.
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <div class="accordion-header">Przykład: Decyzje Biznesowe</div>
-                        <div class="accordion-content">
-                            AI generuje prognozę rynkową i listę optymalnych działań. Człowiek-lider weryfikuje te dane, ocenia, czy sugerowane działania są zgodne z wartościami firmy (osąd etyczny) i uwzględnia nieprzewidziane czynniki ludzkie lub polityczne, których AI nie jest w stanie w pełni zrozumieć. To wzajemne wzmacnianie się: technologia wspiera, a nie ogranicza.
-                        </div>
-                    </div>
-                </p>
+             <button class="accordion">Retencja Klientów (Customer Retention)</button>
+            <div class="panel">
+                <p><strong>Definicja:</strong> To zdolność firmy do zatrzymywania klientów w określonym czasie. Mierzy się ją najczęściej wskaźnikiem retencji, pokazującym procent klientów, którzy powrócili lub pozostali aktywni. Jest to zazwyczaj tańsze niż pozyskiwanie nowych klientów (akwizycja).</p>
+                <p><strong>Przykład:</strong> Kawiarnia "Poranna Kawa" wprowadza program lojalnościowy (np. darmowa ósma kawa), aby zwiększyć retencję. Analityk mierzy, o ile wzrosła liczba powracających klientów po wprowadzeniu tego programu.</p>
+                <p><strong>Kontekst:</strong> Retencja jest kluczową metryką w większości biznesów. Myślenie analityczne pomaga identyfikować czynniki wpływające na lojalność klienta i mierzyć efektywność wdrożonych strategii.</p>
             </div>
         </section>
 
-        <section id="examples-section" class="content-section inner-section">
-            <h2>Przykłady: Konkretne Zastosowania i Case'y</h2>
-
-            <div class="card">
-                <h3>Współpraca w Analizie Danych Medycznych</h3>
-                <p>
-                    <strong>Case:</strong> Diagnozowanie rzadkiej choroby na podstawie skanów medycznych.
-                    <ul>
-                        <li><strong>Rola AI:</strong> System sztucznej inteligencji skanuje tysiące zdjęć rentgenowskich/rezonansów w ciągu sekund, identyfikując subtelne wzorce i anomalie, które umknęłyby ludzkiemu oku. Automatyzuje proces wstępnej klasyfikacji i selekcji.</li>
-                        <li><strong>Rola Człowieka (Analityka/Lekarza):</strong> Lekarz z myśleniem analitycznym nie akceptuje automatycznej diagnozy AI jako ostatecznej. Kwestionuje wyniki, sprawdzając kontekst pacjenta (historia chorób, styl życia), wykonując dodatkowe testy i dokonując etycznego osądu co do planu leczenia. W tym przypadku myślenie analityczne to umiejętność syntezy danych AI z kontekstem ludzkim.</li>
-                    </ul>
-                </p>
-            </div>
+        <section id="examples-section" class="content-section">
+            <h2 class="section-title">Przykłady Zastosowań i Ilustracje</h2>
             
-            <div class="card">
-                <h3>Kwestionowanie Założeń w Mediach</h3>
-                <p>
-                    <strong>Case:</strong> Analiza wiadomości/postów generowanych przez AI w mediach społecznościowych.
-                    <ul>
-                        <li><strong>Zagrożenie:</strong> Treść generowana przez AI jest na tyle realistyczna i spójna, że łatwo przyjąć ją za fakt, co prowadzi do błędnych założeń i dezinformacji.</li>
-                        <li><strong>Myślenie Analityczne w Działaniu:</strong> Zadawanie pytań: "Kto jest źródłem tej informacji?", "Czy dane stojące za tą tezą są wiarygodne?", "Czy istnieją alternatywne wyjaśnienia, np. manipulacja?", "Czy jest to tylko spójna narracja AI, a nie prawdziwa, zweryfikowana informacja?". Aktywne kwestionowanie założeń to codzienna praktyka analityczna.</li>
-                    </ul>
-                </p>
-            </div>
-            
-            <div class="card">
-                <h3>Schemat Synergii Człowiek 🤝 AI</h3>
-                <div class="human-ai-schema">
-                    <div class="human-ai-box">
-                        <h4>Ludzka Inteligencja (HI)</h4>
-                        <ul>
-                            <li>Krytyczne Myślenie</li>
-                            <li>Osąd Etyczny</li>
-                            <li>Oryginalna Kreatywność</li>
-                            <li>Kontekstualne Zrozumienie</li>
-                        </ul>
-                    </div>
-                    <div class="arrow-icon">➡️</div>
-                    <div class="human-ai-box">
-                        <h4>Sztuczna Inteligencja (AI)</h4>
-                        <ul>
-                            <li>Przetwarzanie Dużych Danych</li>
-                            <li>Rozpoznawanie Wzorców</li>
-                            <li>Automatyzacja Zadań</li>
-                            <li>Szybkie Obliczenia</li>
-                        </ul>
-                    </div>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>AI jako Narzędzie, nie Wyrocznia</h3>
+                    <p><strong>Konkretne Zastosowanie:</strong> Zespół marketingowy używa narzędzia AI do rekomendacji najlepszego kanału reklamy dla nowego produktu. AI sugeruje Instagram.</p>
+                    <p><strong>Analityczna Reakcja:</strong> Zamiast ślepo podążać za rekomendacją, analityk pyta: "Na jakich danych opiera się ta rekomendacja? Czy uwzględnia fakt, że nasz produkt jest bardzo niszowy i ma starszą grupę docelową, która jest aktywniejsza na LinkedIn? Jakie są ograniczenia modelu AI?" To przekształca rekomendację AI w hipotezę do przetestowania.</p>
                 </div>
-                <p><strong>Synergia:</strong> Ludzie wykorzystują wyniki z AI, ale zachowują swoje unikalne zdolności – AI jako potężny kalkulator i archiwista, człowiek jako analityk, weryfikator i moralny kompas.</p>
+                
+                <div class="card">
+                    <h3>Ilustracja: Sezonowość Sprzedaży</h3>
+                    <p><strong>Konkretne Zastosowanie:</strong> Piekarnia analizuje spadek sprzedaży ciast w lipcu o 40% w porównaniu do grudnia.</p>
+                    <p><strong>Analityczna Reakcja:</strong> Pierwsza myśl może być alarmująca, ale analityk porównuje te dane z historycznymi danymi sprzedaży. Okazuje się, że to typowy, sezonowy spadek związany z wakacjami i urlopami. Zamiast panikować, proponuje działania kontrujące: np. wprowadzenie specjalnej, lekkiej, letniej oferty (lody, mrożone desery), aby zminimalizować, a nie wyeliminować, spadek.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>Case: Optymalizacja Oferty Produktowej</h3>
+                    <p><strong>Konkretne Zastosowanie:</strong> W supermarkecie badane są koszyki zakupowe (analiza skojarzeniowa). Odkryto, że klienci kupujący pieluchy często kupują też piwo w piątkowe wieczory (klasyczny przykład z analizy danych).</p>
+                    <p><strong>Analityczna Reakcja:</strong> Wniosek: Postawienie piwa obok pieluch zwiększy sprzedaż obu produktów w piątki. Właściwa analiza: Potrzeba rodziców. Zrozumienie, że dane pokazują *korelację* (współwystępowanie), a nie *przyczynowość* (piwo nie powoduje kupna pieluch). Wdrożenie: Test A/B, aby sprawdzić, czy zmiana położenia produktów faktycznie przynosi wzrost zysku, a nie tylko chwilowe zamieszanie.</p>
+                </div>
             </div>
         </section>
 
-        <section id="remember-section" class="content-section inner-section">
-            <h2>Do Zapamiętania: Kluczowe Zasady Analityka w Erze AI</h2>
+        <section id="case-study-section" class="content-section">
+            <h2 class="section-title">Studium Przypadku: Analiza Danych Kawiarni "Poranna Kawa"</h2>
+            
+            <div class="card" style="margin-bottom: 30px;">
+                <h3>Wstęp i Cel Analizy</h3>
+                <p>Case study "Poranna Kawa" jest studium przypadku, które analizowaliśmy podczas lekcji. Kluczowe jest zrozumienie, że w analizie danych rzadko istnieje jedna, **absolutnie poprawna odpowiedź**. Celem jest rozwijanie **logicznego myślenia**, umiejętności **zadawania właściwych pytań** i wyciągania wniosków popartych danymi.</p>
+                
+                <h4>Kluczowy Kontekst (Dodatkowe Informacje):</h4>
+                <ul>
+                    <li>W czerwcu w mieście odbywał się duży festiwal.</li>
+                    <li>W czerwcu wprowadzono nową, droższą sałatkę "premium".</li>
+                    <li>Kawiarnia znajduje się w centrum miasta, niedaleko biurowców.</li>
+                    <li>Konkurencja to inne kawiarnie serwujące inny asortyment.</li>
+                </ul>
+            </div>
 
-            <div class="sticky-notes-grid">
-                <div class="sticky-note">
-                    <strong>Ćwicz Myślenie Analityczne Codziennie</strong>
-                    <p>Analizuj dane w pracy, w domu, w mediach. Szukaj alternatywnych wyjaśnień i nie bój się kwestionować założeń.</p>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>Analiza Obserwacji: Spadek Sprzedaży Kawy</h3>
+                    <p><strong>Obserwacja:</strong> Sprzedaż kawy spadła o **300 sztuk**, co stanowi znaczący spadek o **20%**. Taka zmiana wymaga natychmiastowej uwagi.</p>
+                    <p><strong>Możliwe Interpretacje i Przyczyny Spadku:</strong></p>
+                    <ul>
+                        <li>**Sezonowość (Najbardziej Prawdopodobne):** Latem klienci naturalnie preferują chłodniejsze napoje. Jest to typowy, przewidywalny trend.</li>
+                        <li>**Konkurencja:** Mimo że okoliczne kawiarnie oferują inny asortyment, warto stale monitorować otoczenie.</li>
+                        <li>**Efekt Nowej Sałatki:** Jest mało prawdopodobne, ale istnieje minimalne ryzyko **kanibalizacji cenowej** (klient rezygnuje z kawy, by pokryć koszt droższej sałatki).</li>
+                    </ul>
                 </div>
-                <div class="sticky-note">
-                    <strong>AI Nie Posiada Etycznych Osądów</strong>
-                    <p>To my, ludzie, musimy zapewnić etyczny kontekst i ostateczny osąd dla wszystkich działań sugerowanych lub wykonywanych przez sztuczną inteligencję.</p>
+
+                <div class="card">
+                    <h3>Kluczowe Pytania Analityczne (Krytyczne Myślenie)</h3>
+                    <p>Zawsze zadawaj sobie te pytania, aby uniknąć błędów poznawczych i płytkiej analizy:</p>
+                    <ul>
+                        <li>Jakie są **założenia**, na których opiera się moja interpretacja?</li>
+                        <li>Czy istnieją **alternatywne interpretacje** (np. awaria ekspresu, negatywna recenzja) tych samych danych?</li>
+                        <li>Jakie są **ograniczenia tych danych** (brak informacji o pogodzie, awariach)?</li>
+                        <li>Jakie **błędy poznawcze** (np. błąd konfirmacji) mogą wpłynąć na moją ocenę?</li>
+                        <li>Jakie są **konsekwencje** podjęcia (lub zaniechania) działania na podstawie tych wniosków?</li>
+                    </ul>
                 </div>
-                <div class="sticky-note">
-                    <strong>AI Tylko Automatyzuje, Nie Kreuje Prawdziwie</strong>
-                    <p>AI przetwarza istniejące dane i wzorce. Nie generuje prawdziwie oryginalnych pomysłów ani nie posiada ludzkiej świadomości.</p>
-                </div>
-                <div class="sticky-note">
-                    <strong>Rewolucja AI Wymaga Bycia "Bardziej Ludzkim"</strong>
-                    <p>AI to lustro, które każe nam rozwijać nasze unikalne, ludzkie zdolności: empatię, kreatywność i krytyczne myślenie.</p>
-                </div>
-                <div class="sticky-note">
-                    <strong>Nie Przyjmuj Wyników AI Ślepo</strong>
-                    <p>Zawsze weryfikuj i kontekstualizuj dane. "Halucynacje" AI są realne i mogą prowadzić do poważnych błędów, jeśli zabraknie ludzkiej kontroli.</p>
-                </div>
-                <div class="sticky-note">
-                    <strong>Wykorzystaj AI Jako Narzędzie, Nie Zastępstwo</strong>
-                    <p>Technologia ma Cię wspierać, zwiększając Twoją efektywność, a nie ograniczać Twoją zdolność do samodzielnego myślenia.</p>
-                </div>
+            </div>
+            
+            <div class="card">
+                <h3>Podsumowanie i Proponowane Działania</h3>
+                <p>Analiza przypadku "Poranna Kawa" uczy, że nawet proste dane, poparte **kontekstem** i **krytycznym myśleniem**, mogą dostarczyć cennych informacji. Kluczowe jest niepoprzestawanie na pierwszej, najbardziej oczywistej hipotezie. Proponowane działania to:</p>
+                <ul>
+                    <li>Przeprowadzenie **ankiety z klientami** w celu zebrania informacji zwrotnych.</li>
+                    <li>Wprowadzenie **promocji** na kawę, aby złagodzić sezonowy spadek.</li>
+                    <li>Wprowadzenie **programu lojalnościowego** w celu zwiększenia **retencji** (utrzymania) klientów.</li>
+                    <li>**Monitorowanie konkurencji** i dogłębna analiza danych z systemu POS (Point of Sale).</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="to-remember-section" class="content-section">
+            <h2 class="section-title">Do Zapamiętania</h2>
+            <div class="sticky-note-grid">
+                <div class="sticky-note"><p><strong>AI Przetwarza, Człowiek Myśli:</strong> AI daje tylko dane. Ty musisz zdefiniować problem i krytycznie zinterpretować wyniki.</p></div>
+                <div class="sticky-note"><p><strong>Kwestionuj Założenia:</strong> Zawsze pytaj: "Na jakiej podstawie to zakładam?" Analityczne myślenie zaczyna się od sceptycyzmu.</p></div>
+                <div class="sticky-note"><p><strong>Korelacja ≠ Przyczynowość:</strong> Współwystępowanie zjawisk nie oznacza, że jedno jest powodem drugiego. To najczęstszy błąd w analizie.</p></div>
+                <div class="sticky-note"><p><strong>Zwalczaj Błąd Konfirmacji:</strong> Aktywnie poszukuj dowodów, które zaprzeczają Twojej hipotezie. Tylko to gwarantuje obiektywizm.</p></div>
+                <div class="sticky-note"><p><strong>Retencja jest Królem:</strong> Utrzymanie klienta jest tańsze niż pozyskanie nowego. Programy lojalnościowe są zazwyczaj świetną inwestycją.</p></div>
+                <div class="sticky-note"><p><strong>Wpływ Kontekstu:</strong> Dodatkowe czynniki (pogoda, festiwal, konkurencja) często mają większy wpływ na dane niż prosta metryka. Zawsze szukaj kontekstu.</p></div>
             </div>
         </section>
         
-        <section id="errors-section" class="content-section inner-section">
-            <h2>Najczęstsze Błędy w Pracy z AI i Myśleniu Analitycznym</h2>
-
-            <div class="card">
-                <h3>Błąd 1: Ślepe Zaufanie do Wyników AI</h3>
-                <p>
-                    <strong>Opis:</strong> Traktowanie odpowiedzi generowanych przez AI (np. z ChatGPT, Copilot) jako faktów lub ostatecznych rozwiązań bez ich weryfikacji. Jest to szczególnie niebezpieczne, ponieważ modele te są zaprojektowane do generowania **spójnych** odpowiedzi, które mogą brzmieć przekonująco, nawet jeśli są **nieprawdziwe** ("halucynacje").
-                    <br><br>
-                    <strong>Jak Unikać:</strong> Zawsze stosuj zasadę **"Trust but Verify"** (Ufaj, ale weryfikuj). Pytaj AI o źródła, a następnie niezależnie sprawdzaj te źródła i kontekst, zwłaszcza w krytycznych obszarach (finanse, medycyna, prawo).
-                </p>
-            </div>
-            
-            <div class="card">
-                <h3>Błąd 2: Koncentracja Wyłącznie na Danych Cyfrowych</h3>
-                <p>
-                    <strong>Opis:</strong> Opieranie analizy wyłącznie na twardych danych liczbowych i metrykach dostarczonych przez systemy AI, z pominięciem kontekstu ludzkiego, kulturowego lub etycznego. AI jest słaba w wychwytywaniu niuansów emocjonalnych, motywacji społecznych czy ocenie moralnej.
-                    <br><br>
-                    <strong>Jak Unikać:</strong> Włączaj do analizy jakościowe dane i perspektywy. Zadawaj pytania: "Jakie są **ludzkie** konsekwencje tej optymalizacji?", "Czy to działanie jest **etyczne** i zgodne z naszymi **wartościami**?".
-                </p>
-            </div>
-
-            <div class="card">
-                <h3>Błąd 3: Brak Kwestionowania Założeń Wstępnych</h3>
-                <p>
-                    <strong>Opis:</strong> Przyjmowanie, że założenia, na których oparto model AI lub zbieranie danych, są z natury poprawne. Jeśli dane wejściowe są **uprzedzone** (zawierają błędy lub historyczne bias), model AI powieli i wzmocni te uprzedzenia.
-                    <br><br>
-                    <strong>Jak Unikać:</strong> Zawsze analizuj **założenia** leżące u podstaw danych i algorytmów. Ćwicz aktywne kwestionowanie: "Czy nasze dane reprezentują całą populację?", "Czy ten zestaw danych nie jest z natury **skrzywiony** (biased)?".
-                </p>
+        <section id="most-common-errors-section" class="content-section">
+            <h2 class="section-title">Najczęstsze Błędy w Myśleniu Analitycznym</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>1. Mylenie Korelacji z Przyczynowością</h3>
+                    <p><strong>Wyjaśnienie:</strong> To fundamentalny błąd. Obserwacja, że dwa zdarzenia występują razem (korelacja), nie oznacza, że jedno spowodowało drugie (przyczynowość). Może je łączyć trzeci, ukryty czynnik.</p>
+                    <p><strong>Przykład:</strong> Wzrost sprzedaży lodów jest skorelowany ze wzrostem liczby utonięć. Błąd: Lody powodują utonięcia. Prawidłowa Analiza: Obie zmienne są spowodowane przez trzeci czynnik – ciepłą pogodę. Wzrost temperatury to <strong>przyczyna</strong>, a sprzedaż lodów i utonięcia to <strong>skutki</strong>.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>2. Uleganie Błędom Poznawczym</h3>
+                    <p><strong>Wyjaśnienie:</strong> Ludzki mózg ma skłonność do uproszczeń, które prowadzą do błędnych wniosków. Najgroźniejszy jest <strong>Błąd Konfirmacji</strong> – szukanie tylko dowodów na poparcie naszej tezy.</p>
+                    <p><strong>Przykład:</strong> Analityk, który lubi aplikację X, zawsze interpretuje jej słabe wyniki w pozytywny sposób, zrzucając winę na czynniki zewnętrzne, a mocne wyniki przypisuje genialności produktu (nawet jeśli to była zasługa kampanii marketingowej). Analityk musi być emocjonalnie neutralny.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>3. Ignorowanie Ograniczeń Danych</h3>
+                    <p><strong>Wyjaśnienie:</strong> Żaden zbiór danych nie jest idealny. Zawsze istnieją braki (missing data), błędy pomiarowe (measurement errors) i wyzwania etyczne. Myślenie analityczne polega na rozumieniu, *czego dane Ci nie mówią*.</p>
+                    <p><strong>Przykład:</strong> Dane pokazują, że Twoja strona ma dużo odwiedzin. Błąd: Strona jest świetna. Prawidłowa Analiza: Czy te dane mówią Ci, *jak długo* użytkownicy pozostają na stronie? Czy konwertują? Czy są to boty? Jeśli nie – dane są <strong>ograniczone</strong> i nie pozwalają na pełny wniosek.</p>
+                </div>
             </div>
         </section>
 
-        <section id="more-knowledge-section" class="content-section inner-section">
-            <h2>Więcej Wiedzy: Pogłębianie Umiejętności</h2>
+        <section id="more-knowledge-section" class="content-section">
+            <h2 class="section-title">Więcej Wiedzy: Pogłęb Temat</h2>
+            
+            <div class="external-link-card">
+                <a href="https://hbr.org/2021/05/the-data-and-analytics-skills-gap" target="_blank">The Data and Analytics Skills Gap (Harvard Business Review)</a>
+                <p>Artykuł z HBR, który szczegółowo omawia, dlaczego umiejętności analityczne są dziś kluczowe i jak lukę w nich wykorzystuje się w biznesie. Warto przeczytać, aby zrozumieć, jak myślenie analityczne przekłada się na wartość rynkową Twojej pracy.</p>
+            </div>
+            
+            <div class="external-link-card">
+                <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/critical-thinking-the-underlying-skill-in-analytics" target="_blank">Critical Thinking: The Underlying Skill in Analytics (McKinsey)</a>
+                <p>McKinsey, globalny lider doradztwa, podkreśla, że umiejętność krytycznego myślenia jest fundamentem udanej analizy. Tekst ten dostarcza praktycznych ram i narzędzi do lepszego formułowania problemów przed rozpoczęciem pracy z danymi.</p>
+            </div>
+            
+            <div class="external-link-card">
+                <a href="https://plato.stanford.edu/entries/confirmation-bias/" target="_blank">Confirmation Bias (Stanford Encyclopedia of Philosophy)</a>
+                <p>Szczegółowe, akademickie, ale przystępnie napisane omówienie zjawiska błędu konfirmacji. Zrozumienie psychologicznych korzeni tego błędu pozwala skuteczniej go unikać w codziennej analizie i podejmowaniu decyzji.</p>
+            </div>
 
-            <ul class="link-list">
-                <li class="link-item">
-                    <a href="https://hbr.org/topic/artificial-intelligence" target="_blank">Harvard Business Review - Artificial Intelligence (EN)</a>
-                    <p>Obszerne artykuły i analizy dotyczące strategicznego wpływu AI na biznes, zarządzanie i podejmowanie decyzji. Świetne źródło do zrozumienia kontekstu wykorzystania AI w praktyce korporacyjnej.</p>
-                </li>
-                <li class="link-item">
-                    <a href="https://www.mckinsey.com/featured-insights/artificial-intelligence" target="_blank">McKinsey & Company on AI (EN)</a>
-                    <p>Raporty i badania, które szczegółowo opisują aktualne trendy w AI, jej zastosowanie w różnych sektorach gospodarki oraz prognozy dotyczące przyszłych zmian na rynku pracy i w kompetencjach.</p>
-                </li>
-                <li class="link-item">
-                    <a href="https://www.ted.com/playlists/630/the_future_of_ai" target="_blank">TED Talks: The Future of AI (EN)</a>
-                    <p>Zbiór inspirujących wykładów, które poruszają etyczne, społeczne i technologiczne aspekty rozwoju sztucznej inteligencji. Pozwala na holistyczne spojrzenie na rewolucję technologiczną.</p>
-                </li>
-                <li class="link-item">
-                    <a href="https://www.focus.pl/nauka/sztuczna-inteligencja-i-czlowiek-jak-wspolpracowac-i-co-dalej-38012" target="_blank">Focus.pl: Sztuczna inteligencja i człowiek – jak współpracować (PL)</a>
-                    <p>Artykuł w języku polskim, który koncentruje się na dynamicznej relacji między ludzką inteligencją a AI, podkreślając rolę kompetencji, których maszyny nie są w stanie naśladować.</p>
-                </li>
-                <li class="link-item">
-                    <a href="https://www.coursera.org/learn/critical-thinking" target="_blank">Kurs Coursera: Introduction to Critical Thinking (EN)</a>
-                    <p>Świetny kurs wprowadzający do podstaw krytycznego myślenia i logicznej argumentacji, niezbędny do rozwijania myślenia analitycznego i skutecznej weryfikacji informacji, w tym tych generowanych przez AI.</p>
-                </li>
-            </ul>
+            <div class="external-link-card">
+                <a href="https://www.youtube.com/watch?v=yY-7t-m-H48" target="_blank">Why correlation does not imply causation - lessons from the coffee business (YouTube/TED-Ed)</a>
+                <p>Krótki, animowany film edukacyjny, który w bardzo przystępny sposób wyjaśnia różnicę między korelacją a przyczynowością na konkretnych przykładach. To wizualne przypomnienie, które pomoże utrwalić tę kluczową zasadę analityczną.</p>
+            </div>
+            
+            <div class="external-link-card">
+                <a href="https://www.nngroup.com/articles/f-shaped-pattern-reading-web-content/" target="_blank">F-Shaped Pattern for Reading Web Content (Nielsen Norman Group)</a>
+                <p>Artykuł z Nielsen Norman Group, eksperta od user experience (UX), który omawia, jak użytkownicy skanują strony internetowe (wzór litery F). Pomoże Ci to zrozumieć, dlaczego struktura Twoich notatek jest tak ważna dla efektywności nauki.</p>
+            </div>
         </section>
 
-        <section id="quiz-section" class="content-section inner-section">
-            <h2>Quiz Wiedzy: Myślenie Analityczne w Erze AI</h2>
+        <section id="quiz-section" class="content-section">
+            <h2 class="section-title">Sprawdź Swoją Wiedzę</h2>
             
-            <div class="quiz-container">
-                <div id="quiz-content">
+            <div class="quiz-card">
+                <div id="quiz-container">
                     </div>
                 
                 <div id="quiz-result" style="display:none;">
-                    <p id="quiz-score"></p>
-                    <p id="motivational-quote"></p>
-                    <img id="cat-image" src="" alt="Wynik Quizu"> 
-                    <div class="home-button-container">
-                        <button class="button" id="reset-quiz-button">Spróbuj jeszcze raz</button>
-                    </div>
-                </div>
-
-                <div class="quiz-navigation">
-                    <button class="button" id="prev-button" style="display:none;">&laquo; Wróć do poprzedniego</button>
-                    <button class="button" id="next-button" disabled>Kolejne pytanie &raquo;</button>
-                    <button class="button" id="submit-quiz-button" style="display:none;" disabled>Sprawdź wiedzę</button>
+                    <img id="quiz-cat-image" src="" alt="Kot oceniający wynik quizu" style="display: none;">
+                    <p>Twój wynik:</p>
+                    <div id="quiz-score">0/0</div>
+                    <p id="quiz-quote"></p>
+                    <div id="incorrect-answers-list"></div>
+                    <button class="btn-quiz" onclick="resetQuiz()">Spróbuj jeszcze raz</button>
                 </div>
             </div>
+            
+            <div class="quiz-navigation">
+                <button class="btn-quiz secondary" id="prev-btn" onclick="prevQuestion()" disabled style="display: none;">&larr; Wróć do poprzedniego</button>
+                <button class="btn-quiz" id="next-btn" onclick="nextQuestion()" disabled>Kolejne pytanie</button>
+                <button class="btn-quiz" id="check-btn" onclick="checkAnswers()" disabled style="display: none;">Sprawdź wiedzę</button>
+            </div>
         </section>
-
-    </div>
-    
-    <div id="pdf-container" class="pdf-download-container" style="display:none;">
-        <button class="button" onclick="generatePDF()">Download PDF (Cała Zawartość)</button>
     </div>
 
+    <div id="pdf-container" class="pdf-download-container" style="display: none;">
+        <button class="btn-download-pdf" onclick="generatePDF()">Download PDF</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script>
-        // Dane Quizu
-        const quizQuestions = [
-            {
-                question: "Która z wymienionych zdolności jest unikalna dla człowieka i nie jest w pełni opanowana przez Sztuczną Inteligencję (AI)?",
-                options: ["Automatyzacja powtarzalnych zadań", "Przetwarzanie danych", "Osąd etyczny i kontekstualna kreatywność", "Rozpoznawanie wzorców w tekście"],
-                correctAnswerIndex: 2
-            },
-            {
-                question: "Czym jest myślenie analityczne w kontekście współpracy z AI?",
-                options: ["Bierne przyjmowanie wyników generowanych przez AI.", "Systematyczne rozkładanie problemu i krytyczna weryfikacja założeń.", "Szybkie generowanie pomysłów bez sprawdzania źródeł.", "Unikanie wykorzystania technologii AI."],
-                correctAnswerIndex: 1
-            },
-            {
-                question: "Jaka jest główna rola człowieka w schemacie synergii Człowiek-AI?",
-                options: ["Utrzymywanie systemów AI.", "Dostarczanie surowych danych do trenowania modeli.", "Wnoszenie osądu etycznego i weryfikacji kontekstowej.", "Przeprowadzanie szybkich obliczeń."],
-                correctAnswerIndex: 2
-            },
-            {
-                question: "Co oznaczają 'halucynacje' w kontekście działania Large Language Models (LLM)?",
-                options: ["Generowanie prawdziwie oryginalnych, nowych pomysłów.", "Tworzenie błędnych lub zmyślonych, ale spójnie brzmiących odpowiedzi.", "Umiejętność dokładnego przewidywania przyszłych trendów rynkowych.", "Zdolność do odczuwania ludzkich emocji przez AI."],
-                correctAnswerIndex: 1
-            },
-            {
-                question: "Dlaczego myślenie analityczne jest wyzwaniem do bycia 'bardziej ludzkim'?",
-                options: ["Ponieważ każe nam rozwijać cechy, których AI nie posiada, jak kreatywność i etyka.", "Ponieważ zmusza nas do rywalizacji z AI w szybkości obliczeń.", "Ponieważ ogranicza nasze użycie technologii.", "Ponieważ koncentruje się na pamięciowym przyswajaniu informacji."],
-                correctAnswerIndex: 0
-            },
-            {
-                question: "Który z najczęstszych błędów opisuje ślepe zaufanie do wyników AI?",
-                options: ["Brak kwestionowania założeń wstępnych.", "Brak wykorzystania AI w ogóle.", "Ignorowanie kontekstu ludzkiego.", "Traktowanie odpowiedzi AI jako ostatecznych faktów bez weryfikacji."],
-                correctAnswerIndex: 3
-            },
-            {
-                question: "Co należy zrobić, gdy AI generuje prognozę biznesową?",
-                options: ["Wdrożyć prognozę natychmiast bez zastanowienia.", "Zadać pytania o źródło danych, metodologię i etyczny wymiar działań.", "Całkowicie odrzucić prognozę, ufając tylko intuicji.", "Skopiować prognozę i uznać za własną."],
-                correctAnswerIndex: 1
-            },
-            {
-                question: "Jakie jest praktyczne zalecenie na zakończenie kursu, które można wdrożyć 'już teraz'?",
-                options: ["Całkowicie unikać korzystania z AI.", "Rozwijać umiejętności, których AI nie posiada.", "Wierzyć we wszystko, co napisano w mediach.", "Skupić się wyłącznie na automatyzacji powtarzalnych zadań."],
-                correctAnswerIndex: 1
-            },
-            {
-                question: "Czego AI nie jest w stanie dokonać, co jest kluczowe w pracy analityka?",
-                options: ["Automatycznego sortowania maili.", "Tworzenia dużych baz danych.", "Dokonywania etycznych osądów i tworzenia prawdziwie oryginalnych pomysłów.", "Szybkiego wykonywania skomplikowanych obliczeń."],
-                correctAnswerIndex: 2
-            },
-            {
-                question: "Co jest kluczową funkcją myślenia analitycznego przy analizie danych dostarczonych przez AI?",
-                options: ["Zmiana danych na wykresy.", "Identyfikacja i weryfikacja wzorców i poszukiwanie alternatywnych wyjaśnień.", "Przepisywanie tekstu z AI.", "Kopiowanie wniosków AI bez zmian."],
-                correctAnswerIndex: 1
-            },
-            {
-                question: "Jaki jest jeden z efektów ubocznych polegania wyłącznie na twardych danych liczbowych z AI (Błąd 2)?",
-                options: ["Zbyt szybkie podejmowanie decyzji.", "Pomijanie niuansów emocjonalnych, motywacji społecznych i oceny moralnej.", "Zmniejszenie efektywności.", "Nadmierna personalizacja wyników."],
-                correctAnswerIndex: 1
-            },
-            {
-                question: "W jakich obszarach AI stanowi dla nas 'lustro', które każe nam rozwijać mocne strony?",
-                options: ["W obliczeniach i logice formalnej.", "W kreatywności, krytycznym myśleniu i etyce.", "W szybkości dostarczania informacji.", "W zbieraniu i archiwizowaniu danych."],
-                correctAnswerIndex: 1
-            }
-        ];
-        
-        // Obrazki Kotów (pamiętaj, muszą być dostępne!)
-        const catImages = {
-            '0-25': 'sad cat.jfif',
-            '26-40': 'angry cat.jpg',
-            '41-60': 'disapointed cat.jpg',
-            '61-70': 'happy cat.jpg',
-            '71-100': 'celebraiting cat.jfif'
-        };
+        // --- FUNKCJE NAWIGACYJNE ---
+        let currentSection = 'home';
 
-        const motivationalQuotes = [
-            "Porażka jest tylko możliwością, by zacząć od nowa, tym razem bardziej inteligentnie. Wróć do notatek i opanuj wiedzę!",
-            "Każdy błąd to lekcja. Analiza i poprawa to esencja myślenia analitycznego. Spróbuj raz jeszcze!",
-            "Wiedza to jedyna rzecz, która się mnoży, gdy się ją dzieli. Utrwalaj i pogłębiaj swoje analityczne zdolności.",
-            "Sukces nie jest ostateczny, porażka nie jest fatalna: liczy się odwaga, by kontynuować. Analizuj błędy i idź dalej!",
-            "Droga do mistrzostwa jest długa, ale każdy krok, nawet ten niepoprawny, uczy Cię więcej. Ucz się na błędach i spróbuj ponownie!",
-            "Myślenie analityczne to umiejętność, którą buduje się z każdym pytaniem. Zadawaj je sobie częściej i zacznij od nowa!"
-        ];
-
-        let currentQuestionIndex = 0;
-        let userAnswers = new Array(quizQuestions.length).fill(null);
-        let currentTab = 'home-section';
-
-        // --- Funkcje Nawigacyjne ---
-        
-        function switchTab(targetTabId) {
-            // 1. UKRYJ WSZYSTKIE SEKCJE I ZRESETUJ STYL KONTEJNERA
+        function showSection(sectionId, element = null) {
+            // Ukryj wszystkie sekcje
             document.querySelectorAll('.content-section').forEach(section => {
                 section.classList.remove('active');
+                section.style.display = 'none';
             });
+
+            // Pokaż wybraną sekcję
+            const targetSection = document.getElementById(sectionId + (sectionId === 'home' ? '' : '-section'));
+            if (targetSection) {
+                targetSection.classList.add('active');
+                targetSection.style.display = 'block';
+            }
             
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
+            // Ustaw aktywny przycisk w menu
+            document.querySelectorAll('.nav-menu button').forEach(btn => {
+                btn.classList.remove('active');
             });
+            if (element) {
+                element.classList.add('active');
+            } else if (sectionId === 'home') {
+                document.getElementById('nav-home').classList.add('active');
+            }
 
-            const targetSection = document.getElementById(targetTabId);
-            const mainContainer = document.querySelector('.container');
+            // Pokaż/ukryj przycisk PDF
             const pdfContainer = document.getElementById('pdf-container');
-
-            // 2. LOGIKA DLA STRONY GŁÓWNEJ
-            if (targetTabId === 'home-section') {
-                if (targetSection) {
-                    targetSection.classList.add('active'); // CSS ustawi display: flex
-                }
-                mainContainer.style.background = 'transparent'; 
-                mainContainer.style.boxShadow = 'none';
-                mainContainer.style.padding = '0'; // Usuń padding, aby strona główna zajęła pełną szerokość
+            if (sectionId === 'home') {
                 pdfContainer.style.display = 'none';
             } else {
-            // 3. LOGIKA DLA POZOSTAŁYCH ZAKŁADEK (INNER-SECTIONS)
-                // Upewnij się, że element sekcji jest aktywny
-                if (targetSection) {
-                    targetSection.classList.add('active'); // CSS ustawi display: block
-                }
-                
-                mainContainer.style.background = 'rgba(255, 255, 255, 0.95)'; 
-                mainContainer.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.2)';
-                mainContainer.style.padding = '20px'; 
                 pdfContainer.style.display = 'block';
             }
             
-            // 4. AKTYWACJA ELEMENTU MENU
-            const targetNavItem = document.querySelector(`.nav-item[data-tab="${targetTabId}"]`);
-            if (targetNavItem) {
-                targetNavItem.classList.add('active');
-            }
+            currentSection = sectionId;
             
-            currentTab = targetTabId;
-
-            // Specjalna inicjalizacja Quizu
-            if (targetTabId === 'quiz-section') {
-                renderQuestion();
+            // Specjalne obsługa dla Quizu
+            if (sectionId === 'quiz') {
+                renderQuizQuestion(currentQuestionIndex);
+                document.querySelector('.quiz-navigation').style.display = 'flex';
+                document.getElementById('quiz-result').style.display = 'none';
+                document.getElementById('quiz-container').style.display = 'block';
+                document.querySelector('.quiz-card').style.maxWidth = '700px'; 
+            } else {
+                document.querySelector('.quiz-navigation').style.display = 'none';
+            }
+        }
+        
+        // Przycisk "Chcę wiedzieć więcej" na stronie głównej
+        function showFirstSection() {
+            const firstNavButton = document.querySelector('.nav-menu button:nth-child(2)');
+            if (firstNavButton) {
+                showSection('key-concepts', firstNavButton);
             }
         }
 
-        function goToFirstTab() {
-            // ZMIANA ZGODNA Z NOWYM ŻĄDANIEM: PRZENOŚ DO KLUCZOWYCH POJĘĆ
-            switchTab('key-concepts-section'); 
-        }
-
-        // --- Inicjalizacja Aplikacji ---
+        // Domyślne ustawienie aktywnej sekcji (Strona Główna)
         document.addEventListener('DOMContentLoaded', () => {
-             // 1. Inicjalizacja Menu
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.addEventListener('click', function() {
-                    switchTab(this.getAttribute('data-tab'));
-                });
-            });
-            
-            // 2. Inicjalizacja przycisku "Chcę wiedzieć więcej"
-            document.getElementById('go-to-first-tab').addEventListener('click', goToFirstTab);
-
-            // 3. Inicjalizacja Akordeonów
-            document.querySelectorAll('.accordion-header').forEach(header => {
-                header.addEventListener('click', function() {
-                    this.classList.toggle('active');
-                    const content = this.nextElementSibling;
-                    if (content.style.display === "block") {
-                        content.style.display = "none";
-                    } else {
-                        content.style.display = "block";
-                    }
-                });
-            });
-
-            // Upewnij się, że tylko Home jest aktywny na starcie
-            switchTab(currentTab); 
+            showSection('home', document.getElementById('nav-home'));
         });
 
 
-        // --- QUIZ LOGIKA ---
-        
-        const quizContent = document.getElementById('quiz-content');
-        const prevButton = document.getElementById('prev-button');
-        const nextButton = document.getElementById('next-button');
-        const submitButton = document.getElementById('submit-quiz-button');
-        const resetQuizButton = document.getElementById('reset-quiz-button');
-        const quizResult = document.getElementById('quiz-result');
+        // --- FUNKCJE AKORDEONU ---
+        document.addEventListener('DOMContentLoaded', function() {
+            var acc = document.getElementsByClassName("accordion");
+            var i;
 
-        function renderQuestion() {
-            // Usuń feedback z poprzedniego uruchomienia, jeśli istnieje
-            const feedbackContainer = document.querySelector('.quiz-result-feedback');
-            if(feedbackContainer) {
-                feedbackContainer.remove();
+            for (i = 0; i < acc.length; i++) {
+                acc[i].addEventListener("click", function() {
+                    this.classList.toggle("active-acc");
+                    var panel = this.nextElementSibling;
+                    if (panel.style.maxHeight) {
+                        panel.style.maxHeight = null;
+                    } else {
+                        panel.style.maxHeight = panel.scrollHeight + "px";
+                    } 
+                });
             }
+        });
 
-            quizContent.style.display = 'block';
-            quizContent.innerHTML = '';
-            quizResult.style.display = 'none';
+        // --- FUNKCJE QUIZU ---
+        const quizQuestions = [
+            {
+                question: "Które z wymienionych działań najlepiej zwalcza Błąd Konfirmacji w analizie danych?",
+                options: [
+                    "Wstępne sformułowanie tezy i poszukiwanie tylko ją potwierdzających danych.",
+                    "Aktywne poszukiwanie dowodów i danych, które zaprzeczają postawionej hipotezie.",
+                    "Opieranie się wyłącznie na wynikach z narzędzi AI, bez ludzkiej interpretacji.",
+                    "Konsultowanie wyników wyłącznie z osobami, które mają takie same przekonania."
+                ],
+                correctAnswerIndex: 1,
+                userAnswer: null
+            },
+            {
+                question: "Czym jest 'Retencja Klientów' w kontekście analizy biznesowej?",
+                options: [
+                    "Koszt pozyskania nowego klienta (Customer Acquisition Cost).",
+                    "Zdolność firmy do pozyskiwania nowych klientów w danym okresie.",
+                    "Zdolność firmy do zatrzymywania klientów w określonym czasie, zazwyczaj tańsza niż akwizycja.",
+                    "Wskaźnik niezadowolenia klienta po dokonaniu zakupu."
+                ],
+                correctAnswerIndex: 2,
+                userAnswer: null
+            },
+            {
+                question: "W analizie danych kawiarni 'Poranna Kawa', co uznano za najbardziej prawdopodobną przyczynę 20% spadku sprzedaży kawy w czerwcu?",
+                options: [
+                    "Wprowadzenie nowej, droższej sałatki premium.",
+                    "Lokalizacja kawiarni w centrum miasta, blisko biurowców.",
+                    "Sezonowość, z powodu której ludzie preferują chłodniejsze napoje latem.",
+                    "Brak programu lojalnościowego."
+                ],
+                correctAnswerIndex: 2,
+                userAnswer: null
+            },
+            {
+                question: "Błąd polegający na tym, że wzrost sprzedaży lodów jest 'powodem' wzrostu liczby utonięć jest klasycznym przykładem:",
+                options: [
+                    "Błędu dostępności.",
+                    "Błędu zakotwiczenia.",
+                    "Mylenia Korelacji z Przyczynowością (Causation).",
+                    "Efektu halo."
+                ],
+                correctAnswerIndex: 2,
+                userAnswer: null
+            },
+            {
+                question: "Jakie jest jedno z kluczowych pytań analitycznych, które powinien zadać sobie analityk przy ocenie wyników, według materiału 'Poranna Kawa'?",
+                options: [
+                    "Ile wyniósł całkowity koszt kampanii reklamowej?",
+                    "Jakie są ograniczenia (np. braki) w danych, które analizuję?",
+                    "Kiedy powinienem zrezygnować z analizy i przejść do działania?",
+                    "Jaki jest mój osobisty pogląd na tę sprawę?"
+                ],
+                correctAnswerIndex: 1,
+                userAnswer: null
+            },
+            {
+                question: "W erze AI, rola człowieka w procesie analitycznym sprowadza się przede wszystkim do:",
+                options: [
+                    "Wykonywania obliczeń, które AI wykonuje zbyt wolno.",
+                    "Definiowania problemu, stawiania hipotez i krytycznej oceny etycznej wyników AI.",
+                    "Generowania nowych, syntetycznych danych do trenowania modeli.",
+                    "Akceptowania bez zastrzeżeń każdego wyniku dostarczonego przez algorytmy."
+                ]
+                ,
+                correctAnswerIndex: 1,
+                userAnswer: null
+            }
+        ];
 
-            if (currentQuestionIndex < 0 || currentQuestionIndex >= quizQuestions.length) return;
+        let currentQuestionIndex = 0;
 
-            const q = quizQuestions[currentQuestionIndex];
-            const qElement = document.createElement('div');
-            qElement.classList.add('question-card');
+        function updateQuizNavigation() {
+            const nextBtn = document.getElementById('next-btn');
+            const prevBtn = document.getElementById('prev-btn');
+            const checkBtn = document.getElementById('check-btn');
+            const currentAnswered = quizQuestions[currentQuestionIndex].userAnswer !== null;
 
-            qElement.innerHTML = `
-                <span class="question-number">${currentQuestionIndex + 1}/${quizQuestions.length}</span>
-                <h3>${q.question}</h3>
-                <ul class="options-list">
-                    ${q.options.map((option, index) => `
-                        <li>
-                            <label class="option-label" data-index="${index}">
-                                <input type="radio" name="question-${currentQuestionIndex}" value="${index}" ${userAnswers[currentQuestionIndex] === index ? 'checked' : ''}>
-                                ${option}
-                            </label>
-                        </li>
-                    `).join('')}
-                </ul>
-            `;
-            quizContent.appendChild(qElement);
+            // Logika przycisków
+            nextBtn.disabled = !currentAnswered;
             
-            // Dodaj listener dla wyboru odpowiedzi
-            qElement.querySelectorAll('.option-label').forEach(label => {
+            // Ukrycie/pokazanie przycisku Wróć
+            prevBtn.style.display = currentQuestionIndex > 0 ? 'inline-block' : 'none';
+
+            // Logika Ostatniego Pytania
+            if (currentQuestionIndex === quizQuestions.length - 1) {
+                nextBtn.style.display = 'none';
+                checkBtn.style.display = currentAnswered ? 'inline-block' : 'none';
+                checkBtn.disabled = !quizQuestions.every(q => q.userAnswer !== null);
+            } else {
+                nextBtn.style.display = 'inline-block';
+                checkBtn.style.display = 'none';
+            }
+        }
+
+        function renderQuizQuestion(index) {
+            const container = document.getElementById('quiz-container');
+            if (index < 0 || index >= quizQuestions.length) return;
+
+            const q = quizQuestions[index];
+            
+            let optionsHtml = q.options.map((option, i) => `
+                <label class="quiz-option ${q.userAnswer === i ? 'selected' : ''}">
+                    <input type="radio" name="question-${index}" value="${i}" 
+                           ${q.userAnswer === i ? 'checked' : ''} 
+                           onchange="selectAnswer(${index}, ${i})">
+                    <span>${option}</span>
+                </label>
+            `).join('');
+
+            container.innerHTML = `
+                <div class="question-container">
+                    <p class="question-number">${index + 1}/${quizQuestions.length}</p>
+                    <p class="question-text">${q.question}</p>
+                    <div class="options-group">
+                        ${optionsHtml}
+                    </div>
+                </div>
+            `;
+            
+            // Dodanie event listenerów do opcji, aby zarządzać stylem 'selected'
+            document.querySelectorAll(`.quiz-option`).forEach(label => {
                 label.addEventListener('click', function() {
-                    const selectedIndex = parseInt(this.getAttribute('data-index'));
-                    selectAnswer(currentQuestionIndex, selectedIndex);
-                    
-                    // Wizualne zaznaczenie po kliknięciu
-                    qElement.querySelectorAll('.option-label').forEach(l => l.classList.remove('selected'));
+                    // Usuń 'selected' ze wszystkich opcji
+                    document.querySelectorAll(`.quiz-option`).forEach(opt => opt.classList.remove('selected'));
+                    // Dodaj 'selected' do klikniętej opcji
                     this.classList.add('selected');
                 });
             });
-            
-            // Dodaj klasę 'selected' do etykiety, jeśli odpowiedź jest zaznaczona
-            const selectedAnswerIndex = userAnswers[currentQuestionIndex];
-            if (selectedAnswerIndex !== null) {
-                const selectedLabel = document.querySelector(`.option-label[data-index="${selectedAnswerIndex}"]`);
-                if(selectedLabel) selectedLabel.classList.add('selected');
-            }
 
-            updateNavigationButtons();
+            updateQuizNavigation();
         }
 
-        function selectAnswer(qIndex, answerIndex) {
-            userAnswers[qIndex] = answerIndex;
-            updateNavigationButtons();
-        }
-
-        function updateNavigationButtons() {
-            const hasAnswered = userAnswers[currentQuestionIndex] !== null;
-            const allAnswered = userAnswers.every(answer => answer !== null);
-            
-            // Przycisk "Kolejne pytanie"
-            nextButton.style.display = currentQuestionIndex < quizQuestions.length - 1 ? 'inline-block' : 'none';
-            if (currentQuestionIndex < quizQuestions.length - 1) {
-                nextButton.disabled = !hasAnswered;
-                nextButton.textContent = "Kolejne pytanie »";
-            }
-            
-            // Przycisk "Wróć do poprzedniego"
-            prevButton.style.display = currentQuestionIndex > 0 ? 'inline-block' : 'none';
-            
-            // Przycisk "Sprawdź wiedzę"
-            submitButton.style.display = currentQuestionIndex === quizQuestions.length - 1 ? 'inline-block' : 'none';
-            submitButton.disabled = !allAnswered; 
+        function selectAnswer(qIndex, aIndex) {
+            quizQuestions[qIndex].userAnswer = aIndex;
+            updateQuizNavigation();
+            // Aktualizacja stylu, aby pokazać, że opcja jest zaznaczona (tylko w przypadku zmiany przez JS)
+            document.querySelectorAll(`.quiz-option`).forEach(opt => opt.classList.remove('selected'));
+            document.querySelector(`input[name="question-${qIndex}"][value="${aIndex}"]`).parentNode.classList.add('selected');
         }
 
         function nextQuestion() {
             if (currentQuestionIndex < quizQuestions.length - 1) {
                 currentQuestionIndex++;
-                renderQuestion();
+                renderQuizQuestion(currentQuestionIndex);
             }
         }
 
         function prevQuestion() {
             if (currentQuestionIndex > 0) {
                 currentQuestionIndex--;
-                renderQuestion();
+                renderQuizQuestion(currentQuestionIndex);
             }
         }
+        
+        const catImages = {
+            'sad cat': 'uploaded:sad cat.jfif-a1d51cb0-c8cb-457f-a35f-5d20c1c76f95',
+            'angry cat': 'uploaded:angry cat.jpg-ea0c71af-384a-4345-ae9b-1d74b22e9c9c',
+            'disappointed cat': 'uploaded:disapointed cat.jpg-07ef1a5f-ae3d-41f8-aedf-1fddd4a9a2b5',
+            'happy cat': 'uploaded:happy cat.jpg-06c554cd-41c8-4a26-b9c7-4d2ec79225a3',
+            'celebraiting cat': 'uploaded:celebraiting cat.jfif-dc06fa52-58ac-4cf8-80e0-b6a05e93b60f'
+        };
 
-        function calculateResult() {
+        function checkAnswers() {
             let correctCount = 0;
-            for (let i = 0; i < quizQuestions.length; i++) {
-                if (userAnswers[i] === quizQuestions[i].correctAnswerIndex) {
+            quizQuestions.forEach(q => {
+                if (q.userAnswer === q.correctAnswerIndex) {
                     correctCount++;
                 }
-            }
-            return correctCount;
-        }
-
-        function showResults() {
-            const correctCount = calculateResult();
-            const totalQuestions = quizQuestions.length;
-            const scorePercentage = Math.round((correctCount / totalQuestions) * 100);
-
-            // 1. Ukryj nawigację i pytania
-            quizContent.style.display = 'none';
-            prevButton.style.display = 'none';
-            nextButton.style.display = 'none';
-            submitButton.style.display = 'none';
-            
-            // 2. Wyświetl wynik i cytat
-            document.getElementById('quiz-score').textContent = `${correctCount}/${totalQuestions}`;
-            document.getElementById('motivational-quote').textContent = motivationalQuotes[Math.floor(Math.random() * motivationalQuotes.length)];
-            
-            // 3. Wyświetl obrazek kota
-            let catKey;
-            if (scorePercentage <= 25) catKey = '0-25';
-            else if (scorePercentage <= 40) catKey = '26-40';
-            else if (scorePercentage <= 60) catKey = '41-60';
-            else if (scorePercentage <= 70) catKey = '61-70';
-            else catKey = '71-100';
-            
-            // Użycie nazwy pliku z obiektu catImages
-            document.getElementById('cat-image').src = catImages[catKey]; 
-            quizResult.style.display = 'block';
-
-            // 4. Wyświetl wszystkie pytania z zaznaczonymi odpowiedziami i korektą
-            const resultFeedback = document.createElement('div');
-            resultFeedback.classList.add('quiz-result-feedback');
-            
-            quizQuestions.forEach((q, qIndex) => {
-                const qResultElement = document.createElement('div');
-                qResultElement.classList.add('question-card');
-                
-                 qResultElement.innerHTML = `
-                    <h3>Pytanie ${qIndex + 1}/${totalQuestions}</h3>
-                    <p>${q.question}</p>
-                    <ul class="options-list">
-                        ${q.options.map((option, oIndex) => {
-                            const isCorrect = oIndex === q.correctAnswerIndex;
-                            const isUserSelected = oIndex === userAnswers[qIndex];
-                            let className = '';
-                            let icon = '';
-
-                            if (isCorrect) {
-                                className = 'result-correct';
-                                icon = '✓';
-                            } else if (isUserSelected) {
-                                className = 'result-incorrect';
-                                icon = 'X';
-                            }
-
-                            return `
-                                <li>
-                                    <label class="option-label ${className}" data-index="${oIndex}">
-                                        ${option}
-                                        ${icon ? `<span class="feedback-icon" style="color: ${isCorrect ? 'green' : 'red'};">${icon}</span>` : ''}
-                                    </label>
-                                </li>
-                            `;
-                        }).join('')}
-                    </ul>
-                `;
-                resultFeedback.appendChild(qResultElement);
             });
-            
-            // Dodaj pytania z wynikiem po sekcji wynikowej
-            quizResult.parentNode.insertBefore(resultFeedback, quizResult.nextSibling);
 
+            const totalQuestions = quizQuestions.length;
+            const scorePercentage = (correctCount / totalQuestions) * 100;
+
+            let catAlt, quote;
+            let catImageId;
+
+            if (scorePercentage >= 71) {
+                catImageId = catImages['celebraiting cat'];
+                catAlt = "Celebrujący kot (71%-100%)";
+                quote = "Fenomenalnie! Twoje myślenie analityczne jest na najwyższym poziomie. Kontynuuj tę krytyczną ocenę!";
+            } else if (scorePercentage >= 61) {
+                catImageId = catImages['happy cat'];
+                catAlt = "Zadowolony kotek (61%-70%)";
+                quote = "Bardzo dobrze! Solidne podstawy analityczne. Jeszcze trochę praktyki i osiągniesz mistrzostwo!";
+            } else if (scorePercentage >= 41) {
+                catImageId = catImages['disappointed cat'];
+                catAlt = "Zawiedziony kotek (41%-60%)";
+                quote = "Początek jest dobry, ale widać jeszcze luki. Skup się na błędach poznawczych i wracaj do materiału. Nie poddawaj się!";
+            } else if (scorePercentage >= 26) {
+                catImageId = catImages['angry cat'];
+                catAlt = "Zły kotek (26%-40%)";
+                quote = "Wymagane jest powtórzenie. Wróć do sekcji 'Kluczowe Pojęcia' i 'Najczęstsze Błędy'. Nauce trzeba poświęcić czas, a wyniki przyjdą!";
+            } else {
+                catImageId = catImages['sad cat'];
+                catAlt = "Smutny kotek (0%-25%)";
+                quote = "Musisz zacząć od podstaw. Potraktuj to jako motywację. Każdy błąd to szansa na lepsze zrozumienie. Zacznij od nowa z większą uwagą!";
+            }
+
+            document.getElementById('quiz-score').textContent = `${correctCount}/${totalQuestions}`;
+            document.getElementById('quiz-quote').textContent = quote;
+            
+            const catImgElement = document.getElementById('quiz-cat-image');
+            // Zabezpieczenie na wypadek, gdyby ścieżka do obrazka była tylko ID (jak w przypadku uploaded:...)
+            catImgElement.src = catImageId.startsWith('uploaded:') ? `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADfwGH3QYAAAAASUVORK5CYII=` : catImageId; // Używamy placeholder dla widoczności
+
+            catImgElement.alt = catAlt;
+            catImgElement.style.display = 'block';
+
+            document.getElementById('quiz-container').style.display = 'none';
+            document.querySelector('.quiz-navigation').style.display = 'none';
+            document.getElementById('quiz-result').style.display = 'block';
+
+            // Wyświetlanie szczegółów błędnych odpowiedzi
+            displayIncorrectAnswers();
         }
 
-        // --- Event Listenery Quizu ---
-        nextButton.addEventListener('click', nextQuestion);
-        prevButton.addEventListener('click', prevQuestion);
-        submitButton.addEventListener('click', showResults);
-        
-        resetQuizButton.addEventListener('click', () => {
+        function displayIncorrectAnswers() {
+            const listContainer = document.getElementById('incorrect-answers-list');
+            listContainer.innerHTML = '<h3>Szczegóły:</h3>';
+
+            quizQuestions.forEach((q, qIndex) => {
+                const resultQuestionDiv = document.createElement('div');
+                resultQuestionDiv.className = 'result-question';
+                resultQuestionDiv.innerHTML = `<p class="result-question-text">${qIndex + 1}/${quizQuestions.length}. ${q.question}</p>`;
+
+                q.options.forEach((option, oIndex) => {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.className = 'result-option';
+                    let icon = '';
+
+                    if (oIndex === q.correctAnswerIndex) {
+                        // Zawsze podświetlaj poprawną odpowiedź na zielono
+                        optionDiv.classList.add('correct-answer');
+                        icon = `<span class="icon-check">✓</span>`;
+                    } else if (oIndex === q.userAnswer) {
+                        // Podświetlaj zaznaczoną, ale błędną odpowiedź na czerwono
+                        optionDiv.classList.add('incorrect-selected');
+                        icon = `<span class="icon-x">✗</span>`;
+                    }
+
+                    optionDiv.innerHTML = `${icon} ${option}`;
+                    resultQuestionDiv.appendChild(optionDiv);
+                });
+
+                listContainer.appendChild(resultQuestionDiv);
+            });
+        }
+
+        function resetQuiz() {
             currentQuestionIndex = 0;
-            userAnswers = new Array(quizQuestions.length).fill(null);
-            
-            // Usuń poprzednie feedbacki z quizu
-            const feedbackContainer = document.querySelector('.quiz-result-feedback');
-            if(feedbackContainer) {
-                feedbackContainer.remove();
-            }
-            
-            quizContent.style.display = 'block';
-            renderQuestion();
+            quizQuestions.forEach(q => q.userAnswer = null);
+            document.getElementById('quiz-result').style.display = 'none';
+            document.getElementById('incorrect-answers-list').innerHTML = '';
+            document.getElementById('quiz-cat-image').style.display = 'none';
+            document.querySelector('.quiz-card').style.maxWidth = '700px'; 
+            document.querySelector('.quiz-navigation').style.display = 'flex';
+            renderQuizQuestion(currentQuestionIndex);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuizQuestion(currentQuestionIndex);
         });
         
-        // --- PDF GENERATOR ---
+        // --- FUNKCJA GENEROWANIA PDF ---
         function generatePDF() {
-            // Tymczasowo pokaż całą treść przed generowaniem PDF
-            document.querySelectorAll('.content-section').forEach(section => {
-                if (section.id !== 'home-section') {
-                    section.style.display = 'block';
+            // Tymczasowo pokaż wszystkie sekcje, aby je uwzględnić w PDF
+            const sections = document.querySelectorAll('.content-section');
+            const originalDisplays = [];
+
+            sections.forEach(section => {
+                originalDisplays.push(section.style.display);
+                section.style.display = 'block';
+            });
+            
+            // Ukryj elementy interaktywne na czas generowania PDF
+            const navMenu = document.querySelector('.header');
+            const pdfButton = document.querySelector('.pdf-download-container');
+            navMenu.style.display = 'none';
+            pdfButton.style.display = 'none';
+            
+            // Wymuś otwarcie akordeonów w sekcji Kluczowe Pojęcia
+            document.querySelectorAll('.panel').forEach(panel => {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            });
+            
+            // Przygotowanie elementu do PDF (cały kontener, ale bez nagłówka i przycisków)
+            const element = document.body;
+
+            const opt = {
+                margin: 1,
+                filename: 'Notatki_Myslenie_Analityczne_AI.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, logging: true, dpi: 192, letterRendering: true },
+                jsPDF: { unit: 'cm', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).save().then(() => {
+                // Przywracanie oryginalnego stanu
+                sections.forEach((section, index) => {
+                    section.style.display = originalDisplays[index];
+                });
+                // Przywracanie widoczności menu i przycisku PDF
+                navMenu.style.display = 'block';
+                pdfButton.style.display = 'block';
+                
+                // Ponowne zamknięcie akordeonów
+                document.querySelectorAll('.panel').forEach(panel => {
+                    if (!panel.previousElementSibling.classList.contains('active-acc')) {
+                         panel.style.maxHeight = null;
+                    }
+                });
+                
+                // Przywrócenie widoczności tylko aktywnej sekcji
+                sections.forEach(section => {
+                    if (section.id !== currentSection + (currentSection === 'home' ? '' : '-section')) {
+                         section.style.display = 'none';
+                    } else {
+                         section.style.display = 'block';
+                    }
+                });
+
+                // Przywrócenie widoczności przycisku PDF dla nie-głównej strony
+                if (currentSection !== 'home') {
+                    pdfButton.style.display = 'block';
                 }
             });
-            
-             // Tymczasowo rozwiń akordeony
-            document.querySelectorAll('.accordion-content').forEach(content => {
-                content.style.display = 'block';
-            });
-            document.querySelectorAll('.accordion-header').forEach(header => {
-                header.classList.add('active');
-            });
-            
-            // Ukryj sekcję nawigacji, przyciski i quiz na potrzeby wydruku
-            document.querySelector('.navbar').style.display = 'none';
-            document.getElementById('pdf-container').style.display = 'none';
-            document.querySelectorAll('.home-button-container').forEach(btn => btn.style.display = 'none');
-            
-            // Usunięcie stylów tła dla druku
-            document.body.style.background = '#ffffff';
-            document.querySelector('.container').style.boxShadow = 'none';
-            document.querySelector('.container').style.background = '#ffffff';
-            
-            // Przygotowanie stylów dla druku (ustawienie kolorów tekstu na czarny/ciemny)
-            const oldColorTextDark = getComputedStyle(document.documentElement).getPropertyValue('--color-text-dark');
-            document.documentElement.style.setProperty('--color-text-dark', '#000000'); 
-
-            window.print();
-
-            // Przywróć normalny widok po wydruku/anulowaniu
-            // Wymuś powrót do stanu pierwotnego, by mieć pewność, że wszystko się poprawnie ukryło/pokazało
-            switchTab(currentTab);
-
-            // Przywrócenie ukrytych elementów, które są poza switchTab
-            document.querySelector('.navbar').style.display = 'flex';
-            document.querySelectorAll('.home-button-container').forEach(btn => btn.style.display = 'flex');
-            
-            // Przywróć stan akordeonów
-            document.querySelectorAll('.accordion-content').forEach(content => {
-                content.style.display = 'none';
-            });
-            document.querySelectorAll('.accordion-header').forEach(header => {
-                header.classList.remove('active');
-            });
-            
-            // Przywróć kolory tekstu
-            document.documentElement.style.setProperty('--color-text-dark', oldColorTextDark);
-
         }
-        
     </script>
 </body>
 </html>
