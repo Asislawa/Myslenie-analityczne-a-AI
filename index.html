@@ -13,14 +13,14 @@
             --color-bg-lightest: #12385f;
             --color-bg-lighter: #0e6fa6;
             --color-bg-darker: #074983;
-            --color-bg-accent: #d15124; /* Akcent w gradiencie */
+            --color-bg-accent: #d15124; /* KOLOR PRZYCISKÓW (pomarańczowy akcent) */
             
             /* Kolory Tekstu */
             --color-text-dark: #17336B; /* Ciemny tekst na jasnym tle */
             --color-text-light: #f0f0f0; /* Jasny tekst na ciemnym tle (kremowy) */
             
             /* Kolory Akcentujące (Pastelowe/Stonowane) */
-            --color-accent-blue-purple: #A84FAA; 
+            --color-accent-title: #A84FAA; /* KOLOR TYTUŁÓW I AKCENTÓW (fioletowo-niebieski) */
             --color-accent-pink: #cc99ff;
             --color-card-bg: #ffffff; /* Jasne tło kart */
             --color-sticky-note-1: #ffd700; /* Złoty (dla koloru akcentującego) */
@@ -97,7 +97,7 @@
         .nav-menu button.active {
             background-color: rgba(255, 255, 255, 0.1);
             color: var(--color-accent-pink);
-            border-bottom: 3px solid var(--color-accent-blue-purple);
+            border-bottom: 3px solid var(--color-accent-title); /* Użycie #A84FAA */
         }
 
         /* --- SEKCJE TREŚCI --- */
@@ -109,6 +109,11 @@
         .content-section.active {
             display: block;
         }
+        
+        #home-section.active {
+            /* Strona główna musi używać flex dla centrowania */
+            display: flex;
+        }
 
         h1, h2, h3 {
             font-weight: 900;
@@ -117,7 +122,7 @@
         }
 
         .section-title {
-            color: var(--color-accent-blue-purple);
+            color: var(--color-accent-title); /* Użycie #A84FAA */
             font-size: 32px;
             margin-bottom: 40px;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
@@ -125,7 +130,7 @@
 
         /* Strona Główna */
         #home-section {
-            display: flex;
+            display: none; /* Domyślnie na 'none', w JS ustawione na flex dla 'active' */
             flex-direction: column;
             justify-content: center;
             align-items: center;
@@ -149,8 +154,9 @@
             color: rgba(255, 255, 255, 0.8);
         }
 
+        /* Główny Przycisk Akcji - KOLOR #d15124 */
         .btn-main-action {
-            background-color: var(--color-accent-blue-purple);
+            background-color: var(--color-bg-accent); 
             color: var(--color-text-light);
             border: none;
             padding: 15px 40px;
@@ -160,10 +166,11 @@
             cursor: pointer;
             transition: background-color 0.3s, transform 0.2s;
             text-decoration: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         }
 
         .btn-main-action:hover {
-            background-color: #7c4dff;
+            background-color: #f17b4c; /* Jaśniejszy odcień #d15124 */
             transform: translateY(-2px);
         }
 
@@ -191,7 +198,7 @@
         }
 
         .card h3 {
-            color: var(--color-accent-blue-purple);
+            color: var(--color-accent-title); /* Użycie #A84FAA */
             font-size: 22px;
             border-bottom: 2px solid #e0e0e0;
             padding-bottom: 10px;
@@ -214,7 +221,7 @@
             font-weight: 700;
             border-radius: 8px;
             margin-bottom: 10px;
-            border-left: 5px solid var(--color-accent-blue-purple);
+            border-left: 5px solid var(--color-accent-title); /* Użycie #A84FAA */
         }
 
         .active-acc, .accordion:hover {
@@ -237,7 +244,7 @@
         }
 
         .panel strong {
-            color: var(--color-accent-blue-purple);
+            color: var(--color-accent-title); /* Użycie #A84FAA */
         }
 
         /* Sticky Notes (Do Zapamiętania) */
@@ -280,12 +287,12 @@
             padding: 20px;
             margin-bottom: 15px;
             border-radius: 10px;
-            border-left: 5px solid var(--color-accent-blue-purple);
+            border-left: 5px solid var(--color-accent-title); /* Użycie #A84FAA */
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .external-link-card a {
-            color: var(--color-accent-blue-purple);
+            color: var(--color-accent-title); /* Użycie #A84FAA */
             font-weight: 700;
             text-decoration: none;
             display: block;
@@ -325,7 +332,7 @@
         .question-number {
             font-size: 18px;
             font-weight: 700;
-            color: var(--color-accent-blue-purple);
+            color: var(--color-accent-title); /* Użycie #A84FAA */
             margin-bottom: 10px;
         }
 
@@ -361,17 +368,17 @@
             border-radius: 50%;
             width: 16px;
             height: 16px;
-            border: 2px solid var(--color-accent-blue-purple);
+            border: 2px solid var(--color-accent-title); /* Użycie #A84FAA */
             transition: all 0.2s;
         }
         
         .quiz-option input[type="radio"]:checked {
-            background-color: var(--color-accent-blue-purple);
-            border-color: var(--color-accent-blue-purple);
+            background-color: var(--color-accent-title); /* Użycie #A84FAA */
+            border-color: var(--color-accent-title); /* Użycie #A84FAA */
         }
         
         .quiz-option.selected {
-            box-shadow: 0 0 0 3px var(--color-accent-blue-purple);
+            box-shadow: 0 0 0 3px var(--color-accent-title); /* Użycie #A84FAA */
         }
 
         .quiz-navigation {
@@ -379,9 +386,10 @@
             justify-content: space-between;
             margin-top: 30px;
         }
-
+        
+        /* Przyciski Quizu - KOLOR #d15124 */
         .btn-quiz {
-            background-color: var(--color-accent-blue-purple);
+            background-color: var(--color-bg-accent); 
             color: var(--color-text-light);
             border: none;
             padding: 10px 25px;
@@ -392,6 +400,10 @@
             transition: background-color 0.3s;
         }
 
+        .btn-quiz:hover:not(:disabled) {
+            background-color: #f17b4c;
+        }
+        
         .btn-quiz:disabled {
             background-color: #cccccc;
             cursor: not-allowed;
@@ -403,6 +415,7 @@
 
         /* Wynik Quizu */
         #quiz-result {
+            display: none;
             text-align: center;
             padding: 40px;
             background-color: var(--color-card-bg);
@@ -415,7 +428,7 @@
         #quiz-score {
             font-size: 48px;
             font-weight: 900;
-            color: var(--color-accent-blue-purple);
+            color: var(--color-accent-title); /* Użycie #A84FAA */
             margin-bottom: 10px;
         }
 
@@ -432,7 +445,7 @@
             object-fit: cover;
             margin: 20px auto;
             border-radius: 50%;
-            border: 5px solid var(--color-accent-blue-purple);
+            border: 5px solid var(--color-accent-title); /* Użycie #A84FAA */
         }
 
         .result-question {
@@ -479,16 +492,17 @@
             color: var(--color-incorrect-x);
         }
 
-        /* Przycisk Download PDF */
+        /* Przycisk Download PDF - KOLOR #d15124 */
         .pdf-download-container {
             text-align: center;
             padding: 30px 0;
             background-color: rgba(0, 0, 0, 0.2);
             margin-top: 40px;
+            display: none; /* Domyślnie ukryty, pokazany w JS */
         }
 
         .btn-download-pdf {
-            background-color: var(--color-accent-blue-purple);
+            background-color: var(--color-bg-accent); 
             color: var(--color-text-light);
             border: none;
             padding: 12px 30px;
@@ -497,10 +511,11 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         }
 
         .btn-download-pdf:hover {
-            background-color: #7c4dff;
+            background-color: #f17b4c;
             transform: translateY(-2px);
         }
         
@@ -525,7 +540,7 @@
         }
     </style>
 </head>
-<body>
+<body onload="initAccordions(); showSection('home', document.getElementById('nav-home'))">
 
     <header class="header">
         <nav>
@@ -566,7 +581,7 @@
                 <p><strong>Kontekst:</strong> Myślenie analityczne wymaga ciągłego kwestionowania własnych założeń. Zwalczanie błędu konfirmacji jest niezbędne, aby nie przekształcić analizy w proces szukania dowodów na z góry ustaloną tezę.</p>
             </div>
             
-             <button class="accordion">Retencja Klientów (Customer Retention)</button>
+            <button class="accordion">Retencja Klientów (Customer Retention)</button>
             <div class="panel">
                 <p><strong>Definicja:</strong> To zdolność firmy do zatrzymywania klientów w określonym czasie. Mierzy się ją najczęściej wskaźnikiem retencji, pokazującym procent klientów, którzy powrócili lub pozostali aktywni. Jest to zazwyczaj tańsze niż pozyskiwanie nowych klientów (akwizycja).</p>
                 <p><strong>Przykład:</strong> Kawiarnia "Poranna Kawa" wprowadza program lojalnościowy (np. darmowa ósma kawa), aby zwiększyć retencję. Analityk mierzy, o ile wzrosła liczba powracających klientów po wprowadzeniu tego programu.</p>
@@ -587,13 +602,13 @@
                 <div class="card">
                     <h3>Ilustracja: Sezonowość Sprzedaży</h3>
                     <p><strong>Konkretne Zastosowanie:</strong> Piekarnia analizuje spadek sprzedaży ciast w lipcu o 40% w porównaniu do grudnia.</p>
-                    <p><strong>Analityczna Reakcja:</strong> Pierwsza myśl może być alarmująca, ale analityk porównuje te dane z historycznymi danymi sprzedaży. Okazuje się, że to typowy, sezonowy spadek związany z wakacjami i urlopami. Zamiast panikować, proponuje działania kontrujące: np. wprowadzenie specjalnej, lekkiej, letniej oferty (lody, mrożone desery), aby zminimalizować, a nie wyeliminować, spadek.</p>
+                    <p><strong>Analityczna Reakcja:</strong> Pierwsza myśl może być alarmująca, ale analityk porównuje te dane z historycznymi danymi sprzedaży. Okazuje się, że to typowy, sezonowy spadek związany z wakacjami i urlopami. Zamiast panikować, proponuje działania kontrujące: np. wprowadzenie specjalnej, lekkiej, letniej oferty (lody, mrożone desery), aby zminimalizować, a nie eliminować, spadek.</p>
                 </div>
                 
                 <div class="card">
                     <h3>Case: Optymalizacja Oferty Produktowej</h3>
                     <p><strong>Konkretne Zastosowanie:</strong> W supermarkecie badane są koszyki zakupowe (analiza skojarzeniowa). Odkryto, że klienci kupujący pieluchy często kupują też piwo w piątkowe wieczory (klasyczny przykład z analizy danych).</p>
-                    <p><strong>Analityczna Reakcja:</strong> Wniosek: Postawienie piwa obok pieluch zwiększy sprzedaż obu produktów w piątki. Właściwa analiza: Potrzeba rodziców. Zrozumienie, że dane pokazują *korelację* (współwystępowanie), a nie *przyczynowość* (piwo nie powoduje kupna pieluch). Wdrożenie: Test A/B, aby sprawdzić, czy zmiana położenia produktów faktycznie przynosi wzrost zysku, a nie tylko chwilowe zamieszanie.</p>
+                    <p><strong>Analityczna Reakcja:</strong> Wniosek: Postawienie piwa obok pieluch zwiększy sprzedaż obu produktów w piątki. Właściwa analiza: Potrzeba rodziców. Zrozumienie, że dane pokazują **korelację** (współwystępowanie), a nie **przyczynowość** (piwo nie powoduje kupna pieluch). Wdrożenie: Test A/B, aby sprawdzić, czy zmiana położenia produktów faktycznie przynosi wzrost zysku, a nie tylko chwilowe zamieszanie.</p>
                 </div>
             </div>
         </section>
@@ -621,8 +636,8 @@
                     <p><strong>Możliwe Interpretacje i Przyczyny Spadku:</strong></p>
                     <ul>
                         <li>**Sezonowość (Najbardziej Prawdopodobne):** Latem klienci naturalnie preferują chłodniejsze napoje. Jest to typowy, przewidywalny trend.</li>
-                        <li>**Konkurencja:** Mimo że okoliczne kawiarnie oferują inny asortyment, warto stale monitorować otoczenie.</li>
-                        <li>**Efekt Nowej Sałatki:** Jest mało prawdopodobne, ale istnieje minimalne ryzyko **kanibalizacji cenowej** (klient rezygnuje z kawy, by pokryć koszt droższej sałatki).</li>
+                        <li>**Konkurencja:** Warto stale monitorować otoczenie, nawet jeśli okoliczne kawiarnie oferują inny asortyment.</li>
+                        <li>**Efekt Nowej Sałatki:** Mało prawdopodobne, ale istnieje minimalne ryzyko **kanibalizacji cenowej** (klient rezygnuje z kawy, by pokryć koszt droższej sałatki).</li>
                     </ul>
                 </div>
 
@@ -669,19 +684,19 @@
                 <div class="card">
                     <h3>1. Mylenie Korelacji z Przyczynowością</h3>
                     <p><strong>Wyjaśnienie:</strong> To fundamentalny błąd. Obserwacja, że dwa zdarzenia występują razem (korelacja), nie oznacza, że jedno spowodowało drugie (przyczynowość). Może je łączyć trzeci, ukryty czynnik.</p>
-                    <p><strong>Przykład:</strong> Wzrost sprzedaży lodów jest skorelowany ze wzrostem liczby utonięć. Błąd: Lody powodują utonięcia. Prawidłowa Analiza: Obie zmienne są spowodowane przez trzeci czynnik – ciepłą pogodę. Wzrost temperatury to <strong>przyczyna</strong>, a sprzedaż lodów i utonięcia to <strong>skutki</strong>.</p>
+                    <p><strong>Przykład:</strong> Wzrost sprzedaży lodów jest skorelowany ze wzrostem liczby utonięć. Błąd: Lody powodują utonięcia. Prawidłowa Analiza: Obie zmienne są spowodowane przez trzeci czynnik – ciepłą pogodę. Wzrost temperatury to **przyczyna**, a sprzedaż lodów i utonięcia to **skutki**.</p>
                 </div>
                 
                 <div class="card">
                     <h3>2. Uleganie Błędom Poznawczym</h3>
-                    <p><strong>Wyjaśnienie:</strong> Ludzki mózg ma skłonność do uproszczeń, które prowadzą do błędnych wniosków. Najgroźniejszy jest <strong>Błąd Konfirmacji</strong> – szukanie tylko dowodów na poparcie naszej tezy.</p>
+                    <p><strong>Wyjaśnienie:</strong> Ludzki mózg ma skłonność do uproszczeń, które prowadzą do błędnych wniosków. Najgroźniejszy jest **Błąd Konfirmacji** – szukanie tylko dowodów na poparcie naszej tezy.</p>
                     <p><strong>Przykład:</strong> Analityk, który lubi aplikację X, zawsze interpretuje jej słabe wyniki w pozytywny sposób, zrzucając winę na czynniki zewnętrzne, a mocne wyniki przypisuje genialności produktu (nawet jeśli to była zasługa kampanii marketingowej). Analityk musi być emocjonalnie neutralny.</p>
                 </div>
                 
                 <div class="card">
                     <h3>3. Ignorowanie Ograniczeń Danych</h3>
                     <p><strong>Wyjaśnienie:</strong> Żaden zbiór danych nie jest idealny. Zawsze istnieją braki (missing data), błędy pomiarowe (measurement errors) i wyzwania etyczne. Myślenie analityczne polega na rozumieniu, *czego dane Ci nie mówią*.</p>
-                    <p><strong>Przykład:</strong> Dane pokazują, że Twoja strona ma dużo odwiedzin. Błąd: Strona jest świetna. Prawidłowa Analiza: Czy te dane mówią Ci, *jak długo* użytkownicy pozostają na stronie? Czy konwertują? Czy są to boty? Jeśli nie – dane są <strong>ograniczone</strong> i nie pozwalają na pełny wniosek.</p>
+                    <p><strong>Przykład:</strong> Dane pokazują, że Twoja strona ma dużo odwiedzin. Błąd: Strona jest świetna. Prawidłowa Analiza: Czy te dane mówią Ci, *jak długo* użytkownicy pozostają na stronie? Czy konwertują? Czy są to boty? Jeśli nie – dane są **ograniczone** i nie pozwalają na pełny wniosek.</p>
                 </div>
             </div>
         </section>
@@ -710,114 +725,123 @@
             </div>
             
             <div class="external-link-card">
-                <a href="https://www.nngroup.com/articles/f-shaped-pattern-reading-web-content/" target="_blank">F-Shaped Pattern for Reading Web Content (Nielsen Norman Group)</a>
-                <p>Artykuł z Nielsen Norman Group, eksperta od user experience (UX), który omawia, jak użytkownicy skanują strony internetowe (wzór litery F). Pomoże Ci to zrozumieć, dlaczego struktura Twoich notatek jest tak ważna dla efektywności nauki.</p>
+                <a href="https://www.forbes.com/sites/forbestechcouncil/2023/07/26/the-human-element-critical-thinking-in-the-age-of-ai/" target="_blank">The Human Element: Critical Thinking In The Age Of AI (Forbes)</a>
+                <p>Artykuł skupiający się na komplementarności ludzkiej i sztucznej inteligencji. Pokazuje, jak w przyszłości najbardziej cenione będą te umiejętności, które AI nie potrafi replikować, takie jak etyczne podejmowanie decyzji i krytyczna ocena danych.</p>
             </div>
         </section>
 
         <section id="quiz-section" class="content-section">
-            <h2 class="section-title">Sprawdź Swoją Wiedzę</h2>
-            
+            <h2 class="section-title">Sprawdź Swoją Wiedzę: Quiz Analityczny</h2>
+
             <div class="quiz-card">
-                <div id="quiz-container">
+                <div class="question-container" id="question-container">
                     </div>
-                
-                <div id="quiz-result" style="display:none;">
-                    <img id="quiz-cat-image" src="" alt="Kot oceniający wynik quizu" style="display: none;">
-                    <p>Twój wynik:</p>
-                    <div id="quiz-score">0/0</div>
+
+                <div id="quiz-result">
+                    <h3 id="result-title">Wynik Quizu</h3>
+                    <p id="quiz-score">0/12</p>
+                    <img id="quiz-cat-image" src="" alt="Kotek zależny od wyniku">
                     <p id="quiz-quote"></p>
-                    <div id="incorrect-answers-list"></div>
-                    <button class="btn-quiz" onclick="resetQuiz()">Spróbuj jeszcze raz</button>
+                    <div id="quiz-review">
+                        </div>
+                    <button class="btn-quiz" onclick="restartQuiz()" style="margin-top: 20px;">Spróbuj Ponownie</button>
                 </div>
-            </div>
-            
-            <div class="quiz-navigation">
-                <button class="btn-quiz secondary" id="prev-btn" onclick="prevQuestion()" disabled style="display: none;">&larr; Wróć do poprzedniego</button>
-                <button class="btn-quiz" id="next-btn" onclick="nextQuestion()" disabled>Kolejne pytanie</button>
-                <button class="btn-quiz" id="check-btn" onclick="checkAnswers()" disabled style="display: none;">Sprawdź wiedzę</button>
+
+                <div class="quiz-navigation">
+                    <button id="prev-btn" class="btn-quiz secondary" onclick="navigateQuiz(-1)" disabled>Wróć</button>
+                    <button id="next-btn" class="btn-quiz" onclick="navigateQuiz(1)">Następne</button>
+                    <button id="submit-btn" class="btn-quiz" onclick="submitQuiz()" style="display: none;">Zakończ Quiz</button>
+                </div>
             </div>
         </section>
     </div>
-
-    <div id="pdf-container" class="pdf-download-container" style="display: none;">
-        <button class="btn-download-pdf" onclick="generatePDF()">Download PDF</button>
+    
+    <div class="pdf-download-container" id="pdf-download-container">
+        <button class="btn-download-pdf" onclick="alert('Funkcjonalność generowania PDF jest obecnie wyłączona. Zapisz stronę jako PDF w przeglądarce.');">Pobierz Notatki w PDF</button>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script>
-        // --- FUNKCJE NAWIGACYJNE ---
-        let currentSection = 'home';
+        // Dane Quizu
+        const quizQuestions = [
+            { question: "Myślenie Analityczne w erze AI to przede wszystkim...", options: ["Opracowywanie algorytmów uczenia maszynowego.", "Umiejętność rozkładania złożonego problemu na mniejsze, zarządzalne elementy w celu wyciągnięcia logicznych wniosków.", "Szybkie dochodzenie do wniosków na podstawie intuicji.", "Generowanie kreatywnych i oryginalnych pomysłów."], answer: 1 },
+            { question: "Błąd Konfirmacji (Confirmation Bias) polega na:", options: ["Myleniu korelacji z przyczynowością.", "Automatycznym przyjmowaniu założeń AI za prawdę.", "Tendencji do poszukiwania i faworyzowania informacji, która potwierdza nasze wcześniejsze przekonania.", "Ignorowaniu ograniczeń w danych."], answer: 2 },
+            { question: "Co jest kluczową, unikalnie ludzką umiejętnością w erze AI, która stawia przed nami wyzwanie 'byśmy byli bardziej ludzcy'?", options: ["Szybkość przetwarzania danych (AI jest lepsza).", "Myślenie Analityczne, krytyczna ocena wyników AI i etyczne osądy.", "Tworzenie złożonych, wielopoziomowych modeli danych.", "Wykonywanie powtarzalnych zadań."], answer: 1 },
+            { question: "W przykładzie Kawiarni 'Poranna Kawa', spadek sprzedaży kawy o 20% w czerwcu był najprawdopodobniej spowodowany przez:", options: ["Awarię ekspresu do kawy.", "Wprowadzenie drogiej sałatki premium (kanibalizacja).", "Typową, sezonową preferencję klientów do chłodniejszych napojów.", "Zwiększoną konkurencję w okolicy."], answer: 2 },
+            { question: "Jaka jest fundamentalna różnica, którą należy pamiętać w analizie danych?", options: ["Korelacja ≠ Przyczynowość.", "Sezonowość ≠ Trend.", "Dane historyczne są zawsze lepsze niż dane bieżące.", "Retencja = Akwizycja."], answer: 0 },
+            { question: "Co pomaga zminimalizować Błąd Konfirmacji w pracy analityka?", options: ["Wyłącznie automatyzacja procesu analizy.", "Poszukiwanie dowodów, które zaprzeczają Twojej pierwotnej hipotezie.", "Pracowanie tylko z danymi, które są łatwo dostępne.", "Przyjmowanie pierwszej, najbardziej oczywistej hipotezy."], answer: 1 },
+            { question: "Które działanie ma na celu zwiększenie Retencji Klientów?", options: ["Zwiększenie budżetu na reklamy na Facebooku (Akwizycja).", "Wprowadzenie programu lojalnościowego (np. darmowa ósma kawa).", "Obniżenie cen o 50% dla nowych klientów.", "Zwolnienie większości personelu."], answer: 1 },
+            { question: "Co ilustruje przykład z lodami i utonięciami (wzrost obu latem)?", options: ["Lody powodują utonięcia (przyczynowość).", "Jest to przykład Błędu Konfirmacji.", "Obie zmienne są skorelowane, ale spowodowane przez trzeci czynnik (ciepłą pogodę).", "Jest to przykład ignorowania ograniczeń danych."], answer: 2 },
+            { question: "Co oznacza ignorowanie Ograniczeń Danych?", options: ["Zakładanie, że dane są idealne, pomimo braków lub błędów pomiarowych.", "Zbieranie danych z zbyt wielu źródeł.", "Używanie wyłącznie danych jakościowych.", "Nadmierna dbałość o detale."], answer: 0 },
+            { question: "W kontekście Case Study 'Poranna Kawa', dlaczego kluczowe było dopytanie o dodatkowe informacje (festiwal, biurowce)?", options: ["Aby opóźnić podjęcie decyzji.", "Aby sprawdzić wiedzę zespołu.", "Aby ustalić kontekst, który może wyjaśnić niestandardowe wyniki lub trendy.", "Ponieważ AI tego wymaga."], answer: 2 },
+            { question: "Jaki jest cel krytycznego myślenia w analizie danych?", options: ["Stwierdzenie, że żadne dane nie są wiarygodne.", "Tworzenie skomplikowanych wykresów.", "Kwestionowanie założeń, szukanie alternatywnych interpretacji i ocenianie konsekwencji decyzji.", "Użycie jak największej liczby narzędzi AI."], answer: 2 },
+            { question: "Wskaż prawidłowe działanie analityka po uzyskaniu rekomendacji AI, aby uniknąć traktowania AI jako wyroczni.", options: ["Ślepo podążać za rekomendacją.", "Przekształcić rekomendację AI w hipotezę do przetestowania i dopytać o dane źródłowe.", "Odrzucić rekomendację AI i podjąć własną decyzję.", "Opublikować rekomendację AI natychmiast, bez weryfikacji."], answer: 1 }
+        ];
 
-        function showSection(sectionId, element = null) {
-            // Ukryj wszystkie sekcje
-            document.querySelectorAll('.content-section').forEach(section => {
+        // Obrazy Kotów (na podstawie dostarczonych referencji)
+        const catImages = {
+            sad: "http://googleusercontent.com/youtube.com/a1d51cb0-c8cb-457f-a35f-5d20c1c76f95", // 0-25%
+            angry: "http://googleusercontent.com/youtube.com/ea0c71af-384a-4345-ae9b-1d74b22e9c9c", // 26-40%
+            disappointed: "http://googleusercontent.com/youtube.com/07ef1a5f-ae3d-41f8-aedf-1fddd4a9a2b5", // 41-60%
+            happy: "http://googleusercontent.com/youtube.com/06c554cd-41c8-4a26-b9c7-4d2ec79225a3", // 61-70%
+            celebrating: "http://googleusercontent.com/youtube.com/dc06fa52-58ac-4cf8-80e0-b6a05e93b60f" // 71-100%
+        };
+
+        // Zmienne Quizu
+        let currentQuestionIndex = 0;
+        let userAnswers = new Array(quizQuestions.length).fill(null);
+
+        // --- FUNKCJE NAWIGACJI ---
+        function showSection(sectionId, clickedButton) {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
                 section.classList.remove('active');
-                section.style.display = 'none';
             });
 
-            // Pokaż wybraną sekcję
-            const targetSection = document.getElementById(sectionId + (sectionId === 'home' ? '' : '-section'));
+            const targetSection = document.getElementById(sectionId + '-section');
             if (targetSection) {
                 targetSection.classList.add('active');
-                targetSection.style.display = 'block';
-            }
-            
-            // Ustaw aktywny przycisk w menu
-            document.querySelectorAll('.nav-menu button').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            if (element) {
-                element.classList.add('active');
-            } else if (sectionId === 'home') {
-                document.getElementById('nav-home').classList.add('active');
             }
 
-            // Pokaż/ukryj przycisk PDF
-            const pdfContainer = document.getElementById('pdf-container');
+            const navButtons = document.querySelectorAll('.nav-menu button');
+            navButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            if (clickedButton) {
+                clickedButton.classList.add('active');
+            }
+            
+            // Obsługa Przycisku Download PDF
+            const pdfContainer = document.getElementById('pdf-download-container');
             if (sectionId === 'home') {
                 pdfContainer.style.display = 'none';
             } else {
                 pdfContainer.style.display = 'block';
             }
-            
-            currentSection = sectionId;
-            
-            // Specjalne obsługa dla Quizu
+
+            // Inicjalizacja Quizu przy przejściu na sekcję quizu
             if (sectionId === 'quiz') {
-                renderQuizQuestion(currentQuestionIndex);
-                document.querySelector('.quiz-navigation').style.display = 'flex';
+                loadQuestion(currentQuestionIndex);
                 document.getElementById('quiz-result').style.display = 'none';
-                document.getElementById('quiz-container').style.display = 'block';
-                document.querySelector('.quiz-card').style.maxWidth = '700px'; 
-            } else {
-                document.querySelector('.quiz-navigation').style.display = 'none';
+                document.querySelector('.quiz-navigation').style.display = 'flex';
+                document.getElementById('question-container').style.display = 'block';
             }
         }
-        
-        // Przycisk "Chcę wiedzieć więcej" na stronie głównej
+
+        // Uruchamiane po kliknięciu "Chcę wiedzieć więcej"
         function showFirstSection() {
-            const firstNavButton = document.querySelector('.nav-menu button:nth-child(2)');
-            if (firstNavButton) {
-                showSection('key-concepts', firstNavButton);
-            }
+            // Przechodzi do "Kluczowe Pojęcia"
+            const firstContentButton = document.querySelector('.nav-menu button:nth-child(2)');
+            showSection('key-concepts', firstContentButton);
         }
 
-        // Domyślne ustawienie aktywnej sekcji (Strona Główna)
-        document.addEventListener('DOMContentLoaded', () => {
-            showSection('home', document.getElementById('nav-home'));
-        });
-
-
-        // --- FUNKCJE AKORDEONU ---
-        document.addEventListener('DOMContentLoaded', function() {
-            var acc = document.getElementsByClassName("accordion");
-            var i;
-
-            for (i = 0; i < acc.length; i++) {
+        // --- FUNKCJE AKORDEONÓW ---
+        function initAccordions() {
+            const acc = document.getElementsByClassName("accordion");
+            for (let i = 0; i < acc.length; i++) {
                 acc[i].addEventListener("click", function() {
                     this.classList.toggle("active-acc");
-                    var panel = this.nextElementSibling;
+                    const panel = this.nextElementSibling;
                     if (panel.style.maxHeight) {
                         panel.style.maxHeight = null;
                     } else {
@@ -825,337 +849,164 @@
                     } 
                 });
             }
-        });
-
-        // --- FUNKCJE QUIZU ---
-        const quizQuestions = [
-            {
-                question: "Które z wymienionych działań najlepiej zwalcza Błąd Konfirmacji w analizie danych?",
-                options: [
-                    "Wstępne sformułowanie tezy i poszukiwanie tylko ją potwierdzających danych.",
-                    "Aktywne poszukiwanie dowodów i danych, które zaprzeczają postawionej hipotezie.",
-                    "Opieranie się wyłącznie na wynikach z narzędzi AI, bez ludzkiej interpretacji.",
-                    "Konsultowanie wyników wyłącznie z osobami, które mają takie same przekonania."
-                ],
-                correctAnswerIndex: 1,
-                userAnswer: null
-            },
-            {
-                question: "Czym jest 'Retencja Klientów' w kontekście analizy biznesowej?",
-                options: [
-                    "Koszt pozyskania nowego klienta (Customer Acquisition Cost).",
-                    "Zdolność firmy do pozyskiwania nowych klientów w danym okresie.",
-                    "Zdolność firmy do zatrzymywania klientów w określonym czasie, zazwyczaj tańsza niż akwizycja.",
-                    "Wskaźnik niezadowolenia klienta po dokonaniu zakupu."
-                ],
-                correctAnswerIndex: 2,
-                userAnswer: null
-            },
-            {
-                question: "W analizie danych kawiarni 'Poranna Kawa', co uznano za najbardziej prawdopodobną przyczynę 20% spadku sprzedaży kawy w czerwcu?",
-                options: [
-                    "Wprowadzenie nowej, droższej sałatki premium.",
-                    "Lokalizacja kawiarni w centrum miasta, blisko biurowców.",
-                    "Sezonowość, z powodu której ludzie preferują chłodniejsze napoje latem.",
-                    "Brak programu lojalnościowego."
-                ],
-                correctAnswerIndex: 2,
-                userAnswer: null
-            },
-            {
-                question: "Błąd polegający na tym, że wzrost sprzedaży lodów jest 'powodem' wzrostu liczby utonięć jest klasycznym przykładem:",
-                options: [
-                    "Błędu dostępności.",
-                    "Błędu zakotwiczenia.",
-                    "Mylenia Korelacji z Przyczynowością (Causation).",
-                    "Efektu halo."
-                ],
-                correctAnswerIndex: 2,
-                userAnswer: null
-            },
-            {
-                question: "Jakie jest jedno z kluczowych pytań analitycznych, które powinien zadać sobie analityk przy ocenie wyników, według materiału 'Poranna Kawa'?",
-                options: [
-                    "Ile wyniósł całkowity koszt kampanii reklamowej?",
-                    "Jakie są ograniczenia (np. braki) w danych, które analizuję?",
-                    "Kiedy powinienem zrezygnować z analizy i przejść do działania?",
-                    "Jaki jest mój osobisty pogląd na tę sprawę?"
-                ],
-                correctAnswerIndex: 1,
-                userAnswer: null
-            },
-            {
-                question: "W erze AI, rola człowieka w procesie analitycznym sprowadza się przede wszystkim do:",
-                options: [
-                    "Wykonywania obliczeń, które AI wykonuje zbyt wolno.",
-                    "Definiowania problemu, stawiania hipotez i krytycznej oceny etycznej wyników AI.",
-                    "Generowania nowych, syntetycznych danych do trenowania modeli.",
-                    "Akceptowania bez zastrzeżeń każdego wyniku dostarczonego przez algorytmy."
-                ]
-                ,
-                correctAnswerIndex: 1,
-                userAnswer: null
-            }
-        ];
-
-        let currentQuestionIndex = 0;
-
-        function updateQuizNavigation() {
-            const nextBtn = document.getElementById('next-btn');
-            const prevBtn = document.getElementById('prev-btn');
-            const checkBtn = document.getElementById('check-btn');
-            const currentAnswered = quizQuestions[currentQuestionIndex].userAnswer !== null;
-
-            // Logika przycisków
-            nextBtn.disabled = !currentAnswered;
-            
-            // Ukrycie/pokazanie przycisku Wróć
-            prevBtn.style.display = currentQuestionIndex > 0 ? 'inline-block' : 'none';
-
-            // Logika Ostatniego Pytania
-            if (currentQuestionIndex === quizQuestions.length - 1) {
-                nextBtn.style.display = 'none';
-                checkBtn.style.display = currentAnswered ? 'inline-block' : 'none';
-                checkBtn.disabled = !quizQuestions.every(q => q.userAnswer !== null);
-            } else {
-                nextBtn.style.display = 'inline-block';
-                checkBtn.style.display = 'none';
-            }
-        }
-
-        function renderQuizQuestion(index) {
-            const container = document.getElementById('quiz-container');
-            if (index < 0 || index >= quizQuestions.length) return;
-
-            const q = quizQuestions[index];
-            
-            let optionsHtml = q.options.map((option, i) => `
-                <label class="quiz-option ${q.userAnswer === i ? 'selected' : ''}">
-                    <input type="radio" name="question-${index}" value="${i}" 
-                           ${q.userAnswer === i ? 'checked' : ''} 
-                           onchange="selectAnswer(${index}, ${i})">
-                    <span>${option}</span>
-                </label>
-            `).join('');
-
-            container.innerHTML = `
-                <div class="question-container">
-                    <p class="question-number">${index + 1}/${quizQuestions.length}</p>
-                    <p class="question-text">${q.question}</p>
-                    <div class="options-group">
-                        ${optionsHtml}
-                    </div>
-                </div>
-            `;
-            
-            // Dodanie event listenerów do opcji, aby zarządzać stylem 'selected'
-            document.querySelectorAll(`.quiz-option`).forEach(label => {
-                label.addEventListener('click', function() {
-                    // Usuń 'selected' ze wszystkich opcji
-                    document.querySelectorAll(`.quiz-option`).forEach(opt => opt.classList.remove('selected'));
-                    // Dodaj 'selected' do klikniętej opcji
-                    this.classList.add('selected');
-                });
-            });
-
-            updateQuizNavigation();
-        }
-
-        function selectAnswer(qIndex, aIndex) {
-            quizQuestions[qIndex].userAnswer = aIndex;
-            updateQuizNavigation();
-            // Aktualizacja stylu, aby pokazać, że opcja jest zaznaczona (tylko w przypadku zmiany przez JS)
-            document.querySelectorAll(`.quiz-option`).forEach(opt => opt.classList.remove('selected'));
-            document.querySelector(`input[name="question-${qIndex}"][value="${aIndex}"]`).parentNode.classList.add('selected');
-        }
-
-        function nextQuestion() {
-            if (currentQuestionIndex < quizQuestions.length - 1) {
-                currentQuestionIndex++;
-                renderQuizQuestion(currentQuestionIndex);
-            }
-        }
-
-        function prevQuestion() {
-            if (currentQuestionIndex > 0) {
-                currentQuestionIndex--;
-                renderQuizQuestion(currentQuestionIndex);
-            }
         }
         
-        const catImages = {
-            'sad cat': 'uploaded:sad cat.jfif-a1d51cb0-c8cb-457f-a35f-5d20c1c76f95',
-            'angry cat': 'uploaded:angry cat.jpg-ea0c71af-384a-4345-ae9b-1d74b22e9c9c',
-            'disappointed cat': 'uploaded:disapointed cat.jpg-07ef1a5f-ae3d-41f8-aedf-1fddd4a9a2b5',
-            'happy cat': 'uploaded:happy cat.jpg-06c554cd-41c8-4a26-b9c7-4d2ec79225a3',
-            'celebraiting cat': 'uploaded:celebraiting cat.jfif-dc06fa52-58ac-4cf8-80e0-b6a05e93b60f'
-        };
+        // --- FUNKCJE QUIZU ---
 
-        function checkAnswers() {
+        function loadQuestion(index) {
+            if (index < 0 || index >= quizQuestions.length) return;
+
+            currentQuestionIndex = index;
+            const q = quizQuestions[index];
+            const container = document.getElementById('question-container');
+            container.innerHTML = `
+                <div class="question-number">Pytanie ${index + 1} z ${quizQuestions.length}</div>
+                <div class="question-text">${q.question}</div>
+                <form id="quiz-form">
+                    ${q.options.map((option, i) => `
+                        <label class="quiz-option ${userAnswers[index] === i ? 'selected' : ''}">
+                            <input type="radio" name="question-${index}" value="${i}" 
+                                ${userAnswers[index] === i ? 'checked' : ''} 
+                                onchange="selectAnswer(${index}, ${i})">
+                            ${option}
+                        </label>
+                    `).join('')}
+                </form>
+            `;
+            updateNavigationButtons();
+            
+            // Ponowne dodanie listenerów dla klasy 'quiz-option', aby po kliknięciu zaznaczało radio button
+            document.querySelectorAll('.quiz-option').forEach(label => {
+                label.onclick = function() {
+                    const radio = this.querySelector('input[type="radio"]');
+                    if (radio) {
+                        radio.checked = true;
+                        selectAnswer(index, parseInt(radio.value));
+                    }
+                };
+            });
+        }
+        
+        function selectAnswer(qIndex, aIndex) {
+            userAnswers[qIndex] = aIndex;
+            // Aktualizacja wizualna po zaznaczeniu
+            document.getElementById('quiz-form').querySelectorAll('.quiz-option').forEach((label, i) => {
+                label.classList.remove('selected');
+                if (i === aIndex) {
+                    label.classList.add('selected');
+                }
+            });
+            updateNavigationButtons();
+        }
+
+        function navigateQuiz(direction) {
+            loadQuestion(currentQuestionIndex + direction);
+        }
+
+        function updateNavigationButtons() {
+            document.getElementById('prev-btn').disabled = currentQuestionIndex === 0;
+
+            if (currentQuestionIndex === quizQuestions.length - 1) {
+                document.getElementById('next-btn').style.display = 'none';
+                document.getElementById('submit-btn').style.display = 'block';
+            } else {
+                document.getElementById('next-btn').style.display = 'block';
+                document.getElementById('submit-btn').style.display = 'none';
+            }
+        }
+
+        function submitQuiz() {
             let correctCount = 0;
-            quizQuestions.forEach(q => {
-                if (q.userAnswer === q.correctAnswerIndex) {
+            userAnswers.forEach((answer, index) => {
+                if (answer === quizQuestions[index].answer) {
                     correctCount++;
                 }
             });
 
-            const totalQuestions = quizQuestions.length;
-            const scorePercentage = (correctCount / totalQuestions) * 100;
+            const scorePercent = Math.round((correctCount / quizQuestions.length) * 100);
 
-            let catAlt, quote;
-            let catImageId;
-
-            if (scorePercentage >= 71) {
-                catImageId = catImages['celebraiting cat'];
-                catAlt = "Celebrujący kot (71%-100%)";
-                quote = "Fenomenalnie! Twoje myślenie analityczne jest na najwyższym poziomie. Kontynuuj tę krytyczną ocenę!";
-            } else if (scorePercentage >= 61) {
-                catImageId = catImages['happy cat'];
-                catAlt = "Zadowolony kotek (61%-70%)";
-                quote = "Bardzo dobrze! Solidne podstawy analityczne. Jeszcze trochę praktyki i osiągniesz mistrzostwo!";
-            } else if (scorePercentage >= 41) {
-                catImageId = catImages['disappointed cat'];
-                catAlt = "Zawiedziony kotek (41%-60%)";
-                quote = "Początek jest dobry, ale widać jeszcze luki. Skup się na błędach poznawczych i wracaj do materiału. Nie poddawaj się!";
-            } else if (scorePercentage >= 26) {
-                catImageId = catImages['angry cat'];
-                catAlt = "Zły kotek (26%-40%)";
-                quote = "Wymagane jest powtórzenie. Wróć do sekcji 'Kluczowe Pojęcia' i 'Najczęstsze Błędy'. Nauce trzeba poświęcić czas, a wyniki przyjdą!";
-            } else {
-                catImageId = catImages['sad cat'];
-                catAlt = "Smutny kotek (0%-25%)";
-                quote = "Musisz zacząć od podstaw. Potraktuj to jako motywację. Każdy błąd to szansa na lepsze zrozumienie. Zacznij od nowa z większą uwagą!";
-            }
-
-            document.getElementById('quiz-score').textContent = `${correctCount}/${totalQuestions}`;
-            document.getElementById('quiz-quote').textContent = quote;
-            
-            const catImgElement = document.getElementById('quiz-cat-image');
-            // Zabezpieczenie na wypadek, gdyby ścieżka do obrazka była tylko ID (jak w przypadku uploaded:...)
-            catImgElement.src = catImageId.startsWith('uploaded:') ? `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADfwGH3QYAAAAASUVORK5CYII=` : catImageId; // Używamy placeholder dla widoczności
-
-            catImgElement.alt = catAlt;
-            catImgElement.style.display = 'block';
-
-            document.getElementById('quiz-container').style.display = 'none';
+            // Wyświetlanie wyników
+            document.getElementById('question-container').style.display = 'none';
             document.querySelector('.quiz-navigation').style.display = 'none';
             document.getElementById('quiz-result').style.display = 'block';
+            document.getElementById('quiz-score').innerText = `${correctCount}/${quizQuestions.length}`;
 
-            // Wyświetlanie szczegółów błędnych odpowiedzi
-            displayIncorrectAnswers();
+            displayResultDetails(scorePercent);
+            displayQuizReview();
         }
 
-        function displayIncorrectAnswers() {
-            const listContainer = document.getElementById('incorrect-answers-list');
-            listContainer.innerHTML = '<h3>Szczegóły:</h3>';
+        function displayResultDetails(score) {
+            const resultTitle = document.getElementById('result-title');
+            const quote = document.getElementById('quiz-quote');
+            const catImage = document.getElementById('quiz-cat-image');
 
-            quizQuestions.forEach((q, qIndex) => {
-                const resultQuestionDiv = document.createElement('div');
-                resultQuestionDiv.className = 'result-question';
-                resultQuestionDiv.innerHTML = `<p class="result-question-text">${qIndex + 1}/${quizQuestions.length}. ${q.question}</p>`;
+            if (score >= 71) {
+                resultTitle.innerText = "⭐ Gratulacje! Jesteś Analitycznym Mistrzem! ⭐";
+                quote.innerText = "AI wspiera Cię, ale to Ty utrzymujesz stery. Twoje krytyczne myślenie jest na najwyższym poziomie.";
+                catImage.src = catImages.celebrating;
+            } else if (score >= 61) {
+                resultTitle.innerText = "Bardzo Dobry Wynik! Prawie Doskonale.";
+                quote.innerText = "Masz solidne podstawy. Małe doszlifowanie kluczowych pojęć i będziesz gotów na każde wyzwanie!";
+                catImage.src = catImages.happy;
+            } else if (score >= 41) {
+                resultTitle.innerText = "Dobrze, ale Pamiętaj o Błędach Poznawczych.";
+                quote.innerText = "Poprawnie rozumiesz najważniejsze koncepcje, ale zwróć szczególną uwagę na różnicę między korelacją a przyczynowością.";
+                catImage.src = catImages.disappointed;
+            } else if (score >= 26) {
+                resultTitle.innerText = "Wymagana Powtórka Materiału.";
+                quote.innerText = "Nie martw się! Myślenie analityczne wymaga praktyki. Skup się na definicjach i kontekście AI. Spróbuj ponownie!";
+                catImage.src = catImages.angry;
+            } else {
+                resultTitle.innerText = "Wróć do Podstaw.";
+                quote.innerText = "Pamiętaj, by uczyć się od AI, ale jej nie ufać ślepo. Przejdź przez 'Kluczowe Pojęcia' raz jeszcze, zanim spróbujesz ponownie.";
+                catImage.src = catImages.sad;
+            }
+        }
 
-                q.options.forEach((option, oIndex) => {
-                    const optionDiv = document.createElement('div');
-                    optionDiv.className = 'result-option';
-                    let icon = '';
+        function displayQuizReview() {
+            const reviewContainer = document.getElementById('quiz-review');
+            reviewContainer.innerHTML = '<h3>Szczegóły Twoich Odpowiedzi</h3>';
 
-                    if (oIndex === q.correctAnswerIndex) {
-                        // Zawsze podświetlaj poprawną odpowiedź na zielono
-                        optionDiv.classList.add('correct-answer');
-                        icon = `<span class="icon-check">✓</span>`;
-                    } else if (oIndex === q.userAnswer) {
-                        // Podświetlaj zaznaczoną, ale błędną odpowiedź na czerwono
-                        optionDiv.classList.add('incorrect-selected');
-                        icon = `<span class="icon-x">✗</span>`;
-                    }
+            quizQuestions.forEach((q, index) => {
+                const isCorrect = userAnswers[index] === q.answer;
+                const userAnswerText = userAnswers[index] !== null ? q.options[userAnswers[index]] : "Brak odpowiedzi";
+                const correctAnswerText = q.options[q.answer];
 
-                    optionDiv.innerHTML = `${icon} ${option}`;
-                    resultQuestionDiv.appendChild(optionDiv);
-                });
-
-                listContainer.appendChild(resultQuestionDiv);
+                const questionReview = document.createElement('div');
+                questionReview.classList.add('result-question');
+                questionReview.innerHTML = `
+                    <div class="result-question-text">Pytanie ${index + 1}: ${q.question}</div>
+                    <div class="result-option ${isCorrect ? 'correct-answer' : 'incorrect-selected'}">
+                        ${isCorrect ? '<span class="icon-check">✔</span>' : '<span class="icon-x">✖</span>'}
+                        Twoja odpowiedź: ${userAnswerText}
+                    </div>
+                    ${!isCorrect ? `
+                    <div class="result-option correct-answer" style="margin-top: 5px;">
+                        <span class="icon-check">✔</span>
+                        Poprawna odpowiedź: ${correctAnswerText}
+                    </div>` : ''}
+                `;
+                reviewContainer.appendChild(questionReview);
             });
         }
 
-        function resetQuiz() {
+        function restartQuiz() {
             currentQuestionIndex = 0;
-            quizQuestions.forEach(q => q.userAnswer = null);
+            userAnswers = new Array(quizQuestions.length).fill(null);
             document.getElementById('quiz-result').style.display = 'none';
-            document.getElementById('incorrect-answers-list').innerHTML = '';
-            document.getElementById('quiz-cat-image').style.display = 'none';
-            document.querySelector('.quiz-card').style.maxWidth = '700px'; 
+            document.getElementById('question-container').style.display = 'block';
             document.querySelector('.quiz-navigation').style.display = 'flex';
-            renderQuizQuestion(currentQuestionIndex);
+            loadQuestion(0);
         }
 
+        // Inicjalizacja akordeonów po załadowaniu strony
+        document.addEventListener('DOMContentLoaded', initAccordions);
+        // Uruchomienie Quizu i wyświetlenie pierwszej sekcji po załadowaniu
         document.addEventListener('DOMContentLoaded', () => {
-            renderQuizQuestion(currentQuestionIndex);
+             // Ustawienie aktywnej klasy dla strony głównej na starcie
+            showSection('home', document.getElementById('nav-home'));
+            loadQuestion(0); 
         });
-        
-        // --- FUNKCJA GENEROWANIA PDF ---
-        function generatePDF() {
-            // Tymczasowo pokaż wszystkie sekcje, aby je uwzględnić w PDF
-            const sections = document.querySelectorAll('.content-section');
-            const originalDisplays = [];
-
-            sections.forEach(section => {
-                originalDisplays.push(section.style.display);
-                section.style.display = 'block';
-            });
-            
-            // Ukryj elementy interaktywne na czas generowania PDF
-            const navMenu = document.querySelector('.header');
-            const pdfButton = document.querySelector('.pdf-download-container');
-            navMenu.style.display = 'none';
-            pdfButton.style.display = 'none';
-            
-            // Wymuś otwarcie akordeonów w sekcji Kluczowe Pojęcia
-            document.querySelectorAll('.panel').forEach(panel => {
-                panel.style.maxHeight = panel.scrollHeight + "px";
-            });
-            
-            // Przygotowanie elementu do PDF (cały kontener, ale bez nagłówka i przycisków)
-            const element = document.body;
-
-            const opt = {
-                margin: 1,
-                filename: 'Notatki_Myslenie_Analityczne_AI.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, logging: true, dpi: 192, letterRendering: true },
-                jsPDF: { unit: 'cm', format: 'a4', orientation: 'portrait' }
-            };
-
-            html2pdf().set(opt).from(element).save().then(() => {
-                // Przywracanie oryginalnego stanu
-                sections.forEach((section, index) => {
-                    section.style.display = originalDisplays[index];
-                });
-                // Przywracanie widoczności menu i przycisku PDF
-                navMenu.style.display = 'block';
-                pdfButton.style.display = 'block';
-                
-                // Ponowne zamknięcie akordeonów
-                document.querySelectorAll('.panel').forEach(panel => {
-                    if (!panel.previousElementSibling.classList.contains('active-acc')) {
-                         panel.style.maxHeight = null;
-                    }
-                });
-                
-                // Przywrócenie widoczności tylko aktywnej sekcji
-                sections.forEach(section => {
-                    if (section.id !== currentSection + (currentSection === 'home' ? '' : '-section')) {
-                         section.style.display = 'none';
-                    } else {
-                         section.style.display = 'block';
-                    }
-                });
-
-                // Przywrócenie widoczności przycisku PDF dla nie-głównej strony
-                if (currentSection !== 'home') {
-                    pdfButton.style.display = 'block';
-                }
-            });
-        }
     </script>
 </body>
 </html>
